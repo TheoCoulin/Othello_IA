@@ -1,0 +1,29 @@
+# depslib dependency file v1.0
+1489746679 source:/home-reseau/tcoulin/INFO/3INFO/IA/Othello_IA/src/board.cpp
+	"board.h"
+	<stdio.h>
+	<stdlib.h>
+	<iostream>
+	<string.h>
+
+1489746701 /home-reseau/tcoulin/INFO/3INFO/IA/Othello_IA/include/board.h
+
+1489748507 source:/home-reseau/tcoulin/INFO/3INFO/IA/Othello_IA/src/main.cpp
+	<iostream>
+	"board.h"
+	"display.h"
+	"play.h"
+
+1489748744 source:/home-reseau/tcoulin/INFO/3INFO/IA/Othello_IA/src/play.cpp
+	"play.h"
+	<iostream>
+
+1489748278 /home-reseau/tcoulin/INFO/3INFO/IA/Othello_IA/include/play.h
+
+1489746844 source:/home-reseau/tcoulin/INFO/3INFO/IA/Othello_IA/src/display.cpp
+	"display.h"
+	<iostream>
+
+1489746841 /home-reseau/tcoulin/INFO/3INFO/IA/Othello_IA/include/display.h
+	"board.h"
+
