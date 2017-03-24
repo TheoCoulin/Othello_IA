@@ -26,6 +26,7 @@ int main()
        }
     */
 
+    // SUPER COMMENTAIRE
 
     //cout << "count : "<<p.searchColU(moves, WHITE, game)[0] << ", i : " << p.searchColU(moves, WHITE, game)[1] << ", j : " << p.searchColU(moves, WHITE, game)[2] << " " << endl;
     while (a)
