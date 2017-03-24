@@ -30,3 +30,34 @@
 1489746841 /home-reseau/tcoulin/INFO/3INFO/IA/Othello_IA/include/display.h
 	"board.h"
 
+1490167505 source:/home-reseau/tcoulin/INFO/3INFO/IA/repoOthello/Othello_IA/src/board.cpp
+	"board.h"
+	<stdio.h>
+	<stdlib.h>
+	<iostream>
+	<string.h>
+
+1490171323 /home-reseau/tcoulin/INFO/3INFO/IA/repoOthello/Othello_IA/include/board.h
+	<iostream>
+	<array>
+
+1489746844 source:/home-reseau/tcoulin/INFO/3INFO/IA/repoOthello/Othello_IA/src/display.cpp
+	"display.h"
+	<iostream>
+
+1489746841 /home-reseau/tcoulin/INFO/3INFO/IA/repoOthello/Othello_IA/include/display.h
+	"board.h"
+
+1490352920 source:/home-reseau/tcoulin/INFO/3INFO/IA/repoOthello/Othello_IA/src/main.cpp
+	"board.h"
+	"display.h"
+	"play.h"
+
+1490346889 /home-reseau/tcoulin/INFO/3INFO/IA/repoOthello/Othello_IA/include/play.h
+	<array>
+	"board.h"
+
+1490353080 source:/home-reseau/tcoulin/INFO/3INFO/IA/repoOthello/Othello_IA/src/play.cpp
+	"play.h"
+	<iostream>
+

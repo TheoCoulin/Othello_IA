@@ -18,7 +18,7 @@ class play
         tabcount searchDiagLD(const tabmove& m, int player, board b) const;
         tabcount searchDiagRU(const tabmove& m, int player, board b) const;
         tabcount searchDiagLU(const tabmove& m, int player, board b) const;
-        tabcount isValidMove(const tabmove& m, int player, board b) const;
+        bool isValidMove(const tabmove& m, int player, board b) const;
 
     protected:
 
