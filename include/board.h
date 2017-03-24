@@ -1,6 +1,10 @@
 #ifndef BOARD_H
 #define BOARD_H
+#include <iostream>
+#include <array>
 
+    typedef std::array<int, 2> tabmove;
+    typedef std::array<int,3> tabcount;
     static const int FREE = -1;
     static const int WHITE = 0;
     static const int BLACK = 1;
@@ -14,7 +18,7 @@ class board
         board();
         virtual ~board();
 
-        int get_Board(int i, int j);
+        int get_Board(int i, int j) const;
         void set_Board(int i, int j, int value);
     protected:
 

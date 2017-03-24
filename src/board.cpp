@@ -22,7 +22,7 @@ board::~board()
     //dtor
 }
 
-int board::get_Board(int i, int j)
+int board::get_Board(int i, int j) const
 {
     return game_board[i][j];
 }

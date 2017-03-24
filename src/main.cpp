@@ -1,4 +1,3 @@
-#include <iostream>
 #include "board.h"
 #include "display.h"
 #include "play.h"
@@ -7,13 +6,22 @@ using namespace std;
 
 int main()
 {
+
     board game;
     display disp;
     play p;
-    int moves[2] = {0, 0};
+    tabmove moves;
+    moves.fill(2);
     /* while (!end_of_game) {
+            int player = BLACK;
             disp.print_board_term(game);
-            ask_move(move);
+            do
+            {
+                ask_move(move);
+            } while (!isValidMove())
+
+            if (player == WHITE) player = BLACK;
+            else player = WHITE;
        }
     */
     disp.print_board_term(game);
