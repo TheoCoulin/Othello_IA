@@ -217,3 +217,104 @@ bool play::isValidMove(const tabmove& m, int player, board b) const
         return false;
     }
 }
+
+/*
+* for each sort of move (line left, column up, ..) we verify it's valid (count != 0)
+* we change the value of each place between the move and the closest other piece of the player.
+* finally we display the new board
+* Problem with all the diagonals. It doesn't display anything..
+*/
+void play::updateBoard(board b, const tabmove& m, int player, display disp)
+{
+    int i, j;
+
+    tabcount tabLL = searchLineL(m, player, b);
+    if(tabLL[0] != 0)
+    {
+        for(j = m[1]; j > tabLL[2]; j--)
+            b.set_Board(m[0], j, player);
+    }
+
+    tabcount tabLR = searchLineR(m, player, b);
+    if(tabLR[0] != 0)
+    {
+        for (j = m[1]; j < tabLR[2]; j++)
+            b.set_Board(m[0], j, player);
+    }
+
+    tabcount tabCD = searchColD(m, player, b);
+    if(tabCD[0] != 0)
+    {
+        for(int i = m[0]; i < tabCD[1]; i++)
+            b.set_Board(i, m[1], player);
+    }
+
+    tabcount tabCU = searchColU(m, player, b);
+    if(tabCU[0] != 0)
+    {
+        for(i = m[0]; i > tabCD[1]; i--)
+            b.set_Board(i, m[1], player);
+    }
+
+    tabcount tabDRD = searchDiagRD(m, player, b);
+    cout << tabDRD[0] << " : i = " << tabDRD[1] << ", j = " << tabDRD[2] << endl;
+    if(tabDRD[0] != 0)
+    {
+        i = m[0];
+        j = m[1];
+        while (i < tabDRD[1] && j < tabDRD[2])
+        {
+            b.set_Board(i, j, player);
+            i++;
+            j++;
+        }
+    }
+
+    tabcount tabDLD = searchDiagLD(m, player, b);
+    if(tabDLD[0] != 0)
+    {
+        i = m[0];
+        j = m[1];
+        while(i > tabDLD[1] && j < tabDLD[2])
+        {
+            b.set_Board(tabDLD[1], tabDLD[2], player);
+            i++;
+            j--;
+        }
+    }
+
+
+    tabcount tabDRU = searchDiagRU(m, player, b);
+    if(tabDRU[0] != 0)
+    {
+        i = m[0];
+        j = m[1];
+        while(i > tabDRU[1] && j < tabDRU[2])
+        {
+            b.set_Board(i, j, player);
+            i--;
+            j++;
+        }
+    }
+
+    tabcount tabDLU = searchDiagLU(m, player, b);
+    if(tabDLU[0] !=0)
+    {
+        i = m[0];
+        j = m[1];
+        while(i > tabDLU[1] && j > tabDLU[2])
+        {
+            b.set_Board(i, j, player);
+            i--;
+            j--;
+        }
+    }
+    disp.display::print_board_term(b);
+}
+
+
+
+
+
+
+

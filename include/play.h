@@ -2,6 +2,7 @@
 #define PLAY_H
 #include <array>
 #include "board.h"
+#include "display.h"
 
 class play
 {
@@ -19,6 +20,7 @@ class play
         tabcount searchDiagRU(const tabmove& m, int player, board b) const;
         tabcount searchDiagLU(const tabmove& m, int player, board b) const;
         bool isValidMove(const tabmove& m, int player, board b) const;
+        void updateBoard(board b, const tabmove& m, int player, display disp);
 
     protected:
 
