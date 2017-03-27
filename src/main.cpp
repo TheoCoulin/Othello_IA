@@ -15,19 +15,21 @@ int main()
     moves.fill(0);
     game g;
 
-    /*
+    int player = BLACK;
+    disp.print_board_term(b);
     while(! g.end_of_game(b))
     {
+        cout << "it's your turn " << player << endl;
         do
         {
             p.ask_move(moves);
-        } while (p.isValidMove(moves, player, b));
+        } while (! p.isValidMove(moves, player, b));
         cout << "i : " << moves[0] << ", j : " << moves[1] << endl;
         p.updateBoard(b, moves, player, disp);
         if (player == BLACK) player = WHITE;
         else player = BLACK;
     }
-    */
+
 
 
     return 0;

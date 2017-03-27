@@ -1,4 +1,7 @@
 #include "game.h"
+#include <iostream>
+
+using namespace std;
 
 game::game()
 {
@@ -12,18 +15,20 @@ game::~game()
 
 bool game::end_of_game(board b)
 {
-    bool res = true;
-
-    for (int i = 0; i < SIZE; i++)
+    for(int i = 0; i < SIZE; i++)
     {
-        for(int j; j < SIZE; j++)
+        for(int j = 0; j < SIZE; j++)
         {
-            if (b.get_Board(i,j) != FREE) res = false;
+            if(b.get_Board(i,j) != FREE)
+            {
+                cout << "la partie continue !" << endl;
+                return false;
+            }
         }
     }
 
-    return res;
-
+    cout << "la partie finie !" << endl;
+    return true;
 }
 
 

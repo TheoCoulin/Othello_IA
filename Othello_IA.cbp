@@ -35,12 +35,13 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
-		<Unit filename="definition.h" />
 		<Unit filename="include/board.h" />
 		<Unit filename="include/display.h" />
+		<Unit filename="include/game.h" />
 		<Unit filename="include/play.h" />
 		<Unit filename="src/board.cpp" />
 		<Unit filename="src/display.cpp" />
+		<Unit filename="src/game.cpp" />
 		<Unit filename="src/main.cpp" />
 		<Unit filename="src/play.cpp" />
 		<Extensions>

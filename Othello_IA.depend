@@ -79,7 +79,7 @@
 1490441050 /home/elise/Othello_IA/include/display.h
 	"board.h"
 
-1490550489 source:/home/elise/Othello_IA/src/main.cpp
+1490612806 source:/home/elise/Othello_IA/src/main.cpp
 	"board.h"
 	"display.h"
 	"play.h"
@@ -90,7 +90,7 @@
 	"board.h"
 	"display.h"
 
-1490549975 source:/home/elise/Othello_IA/src/play.cpp
+1490550960 source:/home/elise/Othello_IA/src/play.cpp
 	"play.h"
 	<iostream>
 
@@ -99,6 +99,7 @@
 	"display.h"
 	"play.h"
 
-1490549519 source:/home/elise/Othello_IA/src/game.cpp
+1490613616 source:/home/elise/Othello_IA/src/game.cpp
 	"game.h"
+	<iostream>
 
