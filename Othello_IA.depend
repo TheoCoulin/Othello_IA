@@ -61,7 +61,7 @@
 	"play.h"
 	<iostream>
 
-1490441050 source:/home/elise/Othello_IA/src/board.cpp
+1490615007 source:/home/elise/Othello_IA/src/board.cpp
 	"board.h"
 	<stdio.h>
 	<stdlib.h>
@@ -79,18 +79,18 @@
 1490441050 /home/elise/Othello_IA/include/display.h
 	"board.h"
 
-1490612806 source:/home/elise/Othello_IA/src/main.cpp
+1490615872 source:/home/elise/Othello_IA/src/main.cpp
 	"board.h"
 	"display.h"
 	"play.h"
 	"game.h"
 
-1490543045 /home/elise/Othello_IA/include/play.h
+1490615250 /home/elise/Othello_IA/include/play.h
 	<array>
 	"board.h"
 	"display.h"
 
-1490550960 source:/home/elise/Othello_IA/src/play.cpp
+1490616379 source:/home/elise/Othello_IA/src/play.cpp
 	"play.h"
 	<iostream>
 

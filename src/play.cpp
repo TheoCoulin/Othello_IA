@@ -224,11 +224,12 @@ bool play::isValidMove(const tabmove& m, int player, board b) const
 * finally we display the new board
 * Problem with all the diagonals. It doesn't display anything..
 */
-void play::updateBoard(board b, const tabmove& m, int player, display disp)
+board play::updateBoard(board b, const tabmove& m, int player, display disp)
 {
     int i, j;
 
     tabcount tabLL = searchLineL(m, player, b);
+    cout << "tabLL : " << tabLL[0] << tabLL[1] << tabLL[2] << endl;
     if(tabLL[0] != 0)
     {
         for(j = m[1]; j > tabLL[2]; j--)
@@ -236,6 +237,7 @@ void play::updateBoard(board b, const tabmove& m, int player, display disp)
     }
 
     tabcount tabLR = searchLineR(m, player, b);
+    cout << "tabLR : " << tabLR[0] << tabLR[1] << tabLR[2] << endl;
     if(tabLR[0] != 0)
     {
         for (j = m[1]; j < tabLR[2]; j++)
@@ -243,6 +245,7 @@ void play::updateBoard(board b, const tabmove& m, int player, display disp)
     }
 
     tabcount tabCD = searchColD(m, player, b);
+    cout << "tabCD : " << tabCD[0] << tabCD[1] << tabCD[2] << endl;
     if(tabCD[0] != 0)
     {
         for(int i = m[0]; i < tabCD[1]; i++)
@@ -250,6 +253,7 @@ void play::updateBoard(board b, const tabmove& m, int player, display disp)
     }
 
     tabcount tabCU = searchColU(m, player, b);
+    cout << "tabCU : " << tabCU[0] << tabCU[1] << tabCU[2] << endl;
     if(tabCU[0] != 0)
     {
         for(i = m[0]; i > tabCD[1]; i--)
@@ -257,9 +261,10 @@ void play::updateBoard(board b, const tabmove& m, int player, display disp)
     }
 
     tabcount tabDRD = searchDiagRD(m, player, b);
-    cout << tabDRD[0] << " : i = " << tabDRD[1] << ", j = " << tabDRD[2] << endl;
+
     if(tabDRD[0] != 0)
     {
+        cout << "right down " << tabDRD[0] << " : i = " << tabDRD[1] << ", j = " << tabDRD[2] << endl;
         i = m[0];
         j = m[1];
         while (i < tabDRD[1] && j < tabDRD[2])
@@ -273,6 +278,7 @@ void play::updateBoard(board b, const tabmove& m, int player, display disp)
     tabcount tabDLD = searchDiagLD(m, player, b);
     if(tabDLD[0] != 0)
     {
+     cout << "left down " << searchDiagLD(m, player, b)[0] << " : i = " << searchDiagLD(m, player, b)[1] << ", j = " << searchDiagLD(m, player, b)[2] << endl;
         i = m[0];
         j = m[1];
         while(i > tabDLD[1] && j < tabDLD[2])
@@ -287,6 +293,7 @@ void play::updateBoard(board b, const tabmove& m, int player, display disp)
     tabcount tabDRU = searchDiagRU(m, player, b);
     if(tabDRU[0] != 0)
     {
+     cout << "right up " << tabDRD[0] << " : i = " << tabDRD[1] << ", j = " << tabDRD[2] << endl;
         i = m[0];
         j = m[1];
         while(i > tabDRU[1] && j < tabDRU[2])
@@ -300,6 +307,7 @@ void play::updateBoard(board b, const tabmove& m, int player, display disp)
     tabcount tabDLU = searchDiagLU(m, player, b);
     if(tabDLU[0] !=0)
     {
+     cout << "left up " << tabDRD[0] << " : i = " << tabDRD[1] << ", j = " << tabDRD[2] << endl;
         i = m[0];
         j = m[1];
         while(i > tabDLU[1] && j > tabDLU[2])
@@ -310,6 +318,7 @@ void play::updateBoard(board b, const tabmove& m, int player, display disp)
         }
     }
     disp.display::print_board_term(b);
+    return b;
 }
 
 
