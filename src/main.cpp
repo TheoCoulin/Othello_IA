@@ -17,6 +17,7 @@ int main()
 
     int player = BLACK;
     disp.print_board_term(b);
+
     while(! g.end_of_game(b))
     {
         cout << "it's your turn ";
@@ -32,8 +33,6 @@ int main()
         if (player == BLACK) player = WHITE;
         else player = BLACK;
     }
-
-
 
     return 0;
 }
