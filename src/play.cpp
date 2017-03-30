@@ -31,7 +31,7 @@ tabcount play::searchLineL(const tabmove& m, int player, board b) const
     // test if the move can be valid in a line by looking at the direct neighbours (cf rules)
     if(m[1] == 0 || b.get_Board(m[0], m[1]-1) == FREE || b.get_Board(m[0], m[1]-1) == player) return tab;
 
-    for(int j= m[1] - 1; j >= 0; j--)
+    for(int j= m[1] - 1; j > 0; j--)
     {
         if ( b.get_Board(m[0],j) != player && b.get_Board(m[0],j) != FREE)
         {
@@ -52,7 +52,7 @@ tabcount play::searchLineR(const tabmove& m, int player, board b) const
     tab[1] = m[0];
     // test if the move can be valid in a line by looking at the direct neighbours (cf rules)
     if(m[1] == SIZE - 1 || b.get_Board(m[0], m[1]+1) == FREE || b.get_Board(m[0], m[1]+1) == player) return tab;
-    for(int j= m[1] + 1; j < SIZE; j++)
+    for(int j= m[1] + 1; j < SIZE - 1; j++)
     {
         if ( b.get_Board(m[0],j) != player && b.get_Board(m[0],j) != FREE)
         {
@@ -72,7 +72,7 @@ tabcount play::searchColU(const tabmove& m, int player, board b) const
     tab[2] = m[1];
     // test if the move can be valid in a line by looking at the direct neighbours (cf rules)
     if(m[0] == 0 || b.get_Board( m[0]-1, m[1]) == FREE || b.get_Board(m[0]-1, m[1]) == player) return tab;
-    for(int i= m[0] - 1; i >= 0; i--)
+    for(int i= m[0] - 1; i > 0; i--)
     {
         if ( b.get_Board(i,m[1]) != player && b.get_Board(i, m[1]) != FREE)
         {
@@ -92,9 +92,9 @@ tabcount play::searchColD(const tabmove& m, int player, board b) const
     tab[2] = m[1];
     // test if the move can be valid in a line by looking at the direct neighbours (cf rules)
     if(m[0] == SIZE - 1 || b.get_Board(m[0] + 1, m[1]) == FREE || b.get_Board(m[0] + 1, m[1]) == player) return tab;
-    for(int i= m[0] + 1; i < SIZE; i++)
+    for(int i= m[0] + 1; i < SIZE - 1; i++)
     {
-        if ( b.get_Board(i,m[1]) != player && b.get_Board(i, m[1]) != FREE)
+        if (b.get_Board(i,m[1]) != player && b.get_Board(i, m[1]) != FREE)
         {
             count ++;
             tab[1] = i + 1;
@@ -138,7 +138,7 @@ tabcount play::searchDiagRU(const tabmove& m, int player, board b) const
     if(m[0] == 0 || m[1] == SIZE - 1 || b.get_Board(m[0] - 1, m[1] + 1) == FREE || b.get_Board(m[0] - 1, m[1] + 1) == player) return tab;
     int i = m[0];
     int j = m[1];
-    while ((i > 0) && (j < SIZE))
+    while ((i > 0) && (j < SIZE - 1))
     {
         if (b.get_Board(i,j) != player && b.get_Board(i, j) != FREE)
         {
@@ -162,7 +162,7 @@ tabcount play::searchDiagLD(const tabmove& m, int player, board b) const
     if(m[0] == SIZE - 1 || m[1] == 0 || b.get_Board(m[0] + 1, m[1] - 1) == FREE || b.get_Board(m[0] + 1, m[1] - 1) == player) return tab;
     int i = m[0];
     int j = m[1];
-    while ((i < SIZE) && (j > 0))
+    while ((i < SIZE - 1) && (j > 0))
     {
         if (b.get_Board(i,j) != player && b.get_Board(i, j) != FREE)
         {
@@ -186,7 +186,7 @@ tabcount play::searchDiagRD(const tabmove& m, int player, board b) const
     if(m[0] == SIZE - 1 || b.get_Board(m[0] + 1, m[1] + 1) == FREE || b.get_Board(m[0] + 1, m[1] + 1) == player) return tab;
     int i = m[0];
     int j = m[1];
-    while ((i < SIZE) && (j < SIZE))
+    while ((i < SIZE - 1) && (j < SIZE - 1))
     {
         if (b.get_Board(i,j) != player && b.get_Board(i, j) != FREE)
         {

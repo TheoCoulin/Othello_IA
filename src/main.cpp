@@ -16,6 +16,10 @@ int main()
     game g;
 
     int player = BLACK;
+
+    cout << LEFT_UP_START << " = LUS" << endl;
+    cout << RIGHT_DOWN_START << " = RDS" << endl;
+
     disp.print_board_term(b);
 
     while(! g.end_of_game(b))
