@@ -103,3 +103,45 @@
 	"game.h"
 	<iostream>
 
+1490887778 source:/home/theo/Documents/INFO/3A_IA/repo_othello/Othello_IA/src/board.cpp
+	"board.h"
+	<stdio.h>
+	<stdlib.h>
+	<iostream>
+	<string.h>
+
+1490888496 /home/theo/Documents/INFO/3A_IA/repo_othello/Othello_IA/include/board.h
+	<iostream>
+	<array>
+
+1490888459 source:/home/theo/Documents/INFO/3A_IA/repo_othello/Othello_IA/src/display.cpp
+	"display.h"
+	<iostream>
+
+1490888183 /home/theo/Documents/INFO/3A_IA/repo_othello/Othello_IA/include/display.h
+	"board.h"
+
+1490619540 source:/home/theo/Documents/INFO/3A_IA/repo_othello/Othello_IA/src/game.cpp
+	"game.h"
+	<iostream>
+
+1490619540 /home/theo/Documents/INFO/3A_IA/repo_othello/Othello_IA/include/game.h
+	"board.h"
+	"display.h"
+	"play.h"
+
+1490619540 /home/theo/Documents/INFO/3A_IA/repo_othello/Othello_IA/include/play.h
+	<array>
+	"board.h"
+	"display.h"
+
+1490888190 source:/home/theo/Documents/INFO/3A_IA/repo_othello/Othello_IA/src/main.cpp
+	"board.h"
+	"display.h"
+	"play.h"
+	"game.h"
+
+1490886395 source:/home/theo/Documents/INFO/3A_IA/repo_othello/Othello_IA/src/play.cpp
+	"play.h"
+	<iostream>
+
