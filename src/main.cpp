@@ -24,6 +24,8 @@ int main()
 
     while(! g.end_of_game(b))
     {
+        cout << "number of blacks : " << g.number_pieces(BLACK, b) << endl;
+        cout << "number of whites : " << g.number_pieces(WHITE, b) << endl;
         cout << "it's your turn ";
         if(player == 1) cout << "black" << endl;
         else cout << "white" << endl;
@@ -34,7 +36,7 @@ int main()
         } while (! p.isValidMove(moves, player, b));
       //  cout << "i : " << moves[0] << ", j : " << moves[1] << endl;
         b = p.updateBoard(b, moves, player, disp);
-        if (player == BLACK) player = WHITE;
+        if (player == BLACK ) player = WHITE;
         else player = BLACK;
     }
 
