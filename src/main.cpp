@@ -36,7 +36,7 @@ int main()
         } while (! p.isValidMove(moves, player, b));
       //  cout << "i : " << moves[0] << ", j : " << moves[1] << endl;
         b = p.updateBoard(b, moves, player, disp);
-        if (player == BLACK ) player = WHITE;
+        if (player == BLACK) player = WHITE;
         else player = BLACK;
     }
 

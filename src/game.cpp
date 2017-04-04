@@ -24,44 +24,11 @@ bool game::end_of_game(board b)
         }
     }
 
-    play p;
-    if(!end_of_game_black(b,p) || end_of_game_white(b,p)) return false;
-
     cout << "partie finie" << endl;
     return true;
 }
 
-bool game::end_of_game_black(board b, play p)
-{
-    tabmove tab;
-    for(int i = 0; i < SIZE; i++)
-    {
-        for(int j = 0; j < SIZE; j++)
-        {
-            tab[0] = i;
-            tab[1] = j;
-            if(p.isValidMove(tab,BLACK,b)) return false;
-        }
-    }
-    cout << "aucun coup possible pour le noirs" << endl;
-    return true;
-}
 
-bool game::end_of_game_white(board b, play p)
-{
-    tabmove tab;
-    for(int i = 0; i < SIZE; i++)
-    {
-        for(int j = 0; j < SIZE; j++)
-        {
-            tab[0] = i;
-            tab[1] = j;
-            if(p.isValidMove(tab,WHITE,b)) return false;
-        }
-    }
-    cout << "aucun coup possible pour les blancs" << endl;
-    return true;
-}
 
 
 

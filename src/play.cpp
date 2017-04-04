@@ -116,16 +116,15 @@ tabcount play::searchDiagLU(const tabmove& m, int player, board b) const
     tab[2] = m[1];
     // test if the move can be valid in a diagonal by looking at the direct neighbours (cf rules)
     if(m[0] == 0 || m[1] == 0 || b.get_Board(m[0]-1, m[1] - 1) == FREE || b.get_Board(m[0]-1, m[1] - 1) == player) return tab;
-    int i = m[0];
-    int j = m[1];
-    while ((i > 0) && (j > 0))
+    int i = m[0]-1;
+    int j = m[1]-1;
+    while ((i > 0) && (j > 0) && b.get_Board(i,j) != player && b.get_Board(i, j) != FREE)
     {
-        if (b.get_Board(i,j) != player && b.get_Board(i, j) != FREE)
-        {
-            count ++;
-            tab[1] = i - 1;
-            tab[2] = j - 1;
-        }
+
+        count ++;
+        tab[1] = i - 1;
+        tab[2] = j - 1;
+
         i--;
         j--;
     }
@@ -140,16 +139,13 @@ tabcount play::searchDiagRU(const tabmove& m, int player, board b) const
     tab.fill(0);
     // test if the move can be valid in a diagonal by looking at the direct neighbours (cf rules)
     if(m[0] == 0 || m[1] == SIZE - 1 || b.get_Board(m[0] - 1, m[1] + 1) == FREE || b.get_Board(m[0] - 1, m[1] + 1) == player) return tab;
-    int i = m[0];
-    int j = m[1];
-    while ((i > 0) && (j < SIZE - 1))
+    int i = m[0]-1;
+    int j = m[1]+1;
+    while ((i > 0) && (j < SIZE - 1) && b.get_Board(i,j) != player && b.get_Board(i, j) != FREE)
     {
-        if (b.get_Board(i,j) != player && b.get_Board(i, j) != FREE)
-        {
-            count ++;
-            tab[1] = i - 1;
-            tab[2] = j + 1;
-        }
+        count ++;
+        tab[1] = i - 1;
+        tab[2] = j + 1;
         i--;
         j++;
     }
@@ -164,16 +160,14 @@ tabcount play::searchDiagLD(const tabmove& m, int player, board b) const
     tab.fill(0);
     // test if the move can be valid in a diagonal by looking at the direct neighbours (cf rules)
     if(m[0] == SIZE - 1 || m[1] == 0 || b.get_Board(m[0] + 1, m[1] - 1) == FREE || b.get_Board(m[0] + 1, m[1] - 1) == player) return tab;
-    int i = m[0];
-    int j = m[1];
-    while ((i < SIZE - 1) && (j > 0))
+    int i = m[0]+1;
+    int j = m[1]-1;
+    while ((i < SIZE - 1) && (j > 0) && b.get_Board(i,j) != player && b.get_Board(i, j) != FREE)
     {
-        if (b.get_Board(i,j) != player && b.get_Board(i, j) != FREE)
-        {
-            count ++;
-            tab[1] = i + 1;
-            tab[2] = j - 1;
-        }
+        count ++;
+        tab[1] = i + 1;
+        tab[2] = j - 1;
+
         i++;
         j--;
     }
@@ -188,16 +182,13 @@ tabcount play::searchDiagRD(const tabmove& m, int player, board b) const
     tab.fill(0);
     // test if the move can be valid in a diagonal by looking at the direct neighbours (cf rules)
     if(m[0] == SIZE - 1 || b.get_Board(m[0] + 1, m[1] + 1) == FREE || b.get_Board(m[0] + 1, m[1] + 1) == player) return tab;
-    int i = m[0];
-    int j = m[1];
-    while ((i < SIZE - 1) && (j < SIZE - 1))
+    int i = m[0]+1;
+    int j = m[1]+1;
+    while ((i < SIZE - 1) && (j < SIZE - 1) && b.get_Board(i,j) != player && b.get_Board(i, j) != FREE)
     {
-        if (b.get_Board(i,j) != player && b.get_Board(i, j) != FREE)
-        {
-            count ++;
-            tab[1] = i + 1;
-            tab[2] = j + 1;
-        }
+        count ++;
+        tab[1] = i + 1;
+        tab[2] = j + 1;
         i++;
         j++;
     }
@@ -242,7 +233,7 @@ board play::updateBoard(board b, const tabmove& m, int player, display disp)
     tabcount tab;
 
     tab = searchLineL(m, player, b);
-    cout << "tabLL : " << tab[0] << tab[1] << tab[2] << endl;
+    //cout << "tabLL : " << tab[0] << tab[1] << tab[2] << endl;
    // cout << "searchLineL : " << searchLineL(m, player, b)[0] << searchLineL(m, player, b)[1] << searchLineL(m, player, b)[2] << endl;
     if(tab[0] != 0)
     {
@@ -251,7 +242,7 @@ board play::updateBoard(board b, const tabmove& m, int player, display disp)
     }
 
     tab = searchLineR(m, player, b);
-    cout << "tabLR : " << tab[0] << tab[1] << tab[2] << endl;
+   // cout << "tabLR : " << tab[0] << tab[1] << tab[2] << endl;
   //  cout << "searchLineR : " << searchLineR(m, player, b)[0] << searchLineR(m, player, b)[1] << searchLineR(m, player, b)[2] << endl;
     if(tab[0] != 0)
     {
@@ -260,7 +251,7 @@ board play::updateBoard(board b, const tabmove& m, int player, display disp)
     }
 
     tab = searchColD(m, player, b);
-    cout << "tabCD : " << tab[0] << tab[1] << tab[2] << endl;
+  //  cout << "tabCD : " << tab[0] << tab[1] << tab[2] << endl;
  //   cout << "searchColD : " << searchColD(m, player, b)[0] << searchColD(m, player, b)[1] << searchColD(m, player, b)[2] << endl;
     if(tab[0] != 0)
     {
@@ -269,7 +260,7 @@ board play::updateBoard(board b, const tabmove& m, int player, display disp)
     }
 
     tab = searchColU(m, player, b);
-    cout << "tabCU : " << tab[0] << tab[1] << tab[2] << endl;
+  //  cout << "tabCU : " << tab[0] << tab[1] << tab[2] << endl;
   //  cout << "searchColU : " << searchColU(m, player, b)[0] << searchColU(m, player, b)[1] << searchColU(m, player, b)[2] << endl;
     if(tab[0] != 0)
     {
@@ -279,7 +270,7 @@ board play::updateBoard(board b, const tabmove& m, int player, display disp)
 
 
     tab = searchDiagRD(m, player, b);
-    cout << "tabDRD : " << tab[0] << tab[1] << tab[2] << endl;
+  //  cout << "tabDRD : " << tab[0] << tab[1] << tab[2] << endl;
   //  cout << "searchDiagRD : " << searchDiagRD(m, player, b)[0] << searchDiagRD(m, player, b)[1] << searchDiagRD(m, player, b)[2] << endl;
     if(tab[0] != 0)
     {
@@ -294,7 +285,7 @@ board play::updateBoard(board b, const tabmove& m, int player, display disp)
     }
 
     tab = searchDiagLD(m, player, b);
-    cout << "tabDLD : " << tab[0] << tab[1] << tab[2] << endl;
+ //   cout << "tabDLD : " << tab[0] << tab[1] << tab[2] << endl;
 //    cout << "searchDiagLD : " << searchDiagLD(m, player, b)[0] << searchDiagLD(m, player, b)[1] << searchDiagLD(m, player, b)[2] << endl;
     if(tab[0] != 0)
     {
@@ -310,7 +301,7 @@ board play::updateBoard(board b, const tabmove& m, int player, display disp)
 
 
     tab = searchDiagRU(m, player, b);
-    cout << "tabDRU : " << tab[0] << tab[1] << tab[2] << endl;
+ //   cout << "tabDRU : " << tab[0] << tab[1] << tab[2] << endl;
  //   cout << "searchDiagRU : " << searchDiagRU(m, player, b)[0] << searchDiagRU(m, player, b)[1] << searchDiagRU(m, player, b)[2] << endl;
     if(tab[0] != 0)
     {
@@ -326,7 +317,7 @@ board play::updateBoard(board b, const tabmove& m, int player, display disp)
 
 
     tab = searchDiagLU(m, player, b);
-    cout << "tabDLU : " << tab[0] << tab[1] << tab[2] << endl;
+  //  cout << "tabDLU : " << tab[0] << tab[1] << tab[2] << endl;
  //   cout << "searchDiagLU : " << searchDiagLU(m, player, b)[0] << searchDiagLU(m, player, b)[1] << searchDiagLU(m, player, b)[2] << endl;
     if(tab[0] !=0)
     {

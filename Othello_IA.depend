@@ -145,3 +145,45 @@
 	"play.h"
 	<iostream>
 
+1491313517 source:/home-reseau/epottier/IA/Othello_IA/src/board.cpp
+	"board.h"
+	<stdio.h>
+	<stdlib.h>
+	<iostream>
+	<string.h>
+
+1491315513 /home-reseau/epottier/IA/Othello_IA/include/board.h
+	<iostream>
+	<array>
+
+1491313517 source:/home-reseau/epottier/IA/Othello_IA/src/display.cpp
+	"display.h"
+	<iostream>
+
+1491313517 /home-reseau/epottier/IA/Othello_IA/include/display.h
+	"board.h"
+
+1491316149 source:/home-reseau/epottier/IA/Othello_IA/src/game.cpp
+	"game.h"
+	<iostream>
+
+1491316139 /home-reseau/epottier/IA/Othello_IA/include/game.h
+	"board.h"
+	"display.h"
+	"play.h"
+
+1491313517 /home-reseau/epottier/IA/Othello_IA/include/play.h
+	<array>
+	"board.h"
+	"display.h"
+
+1491316446 source:/home-reseau/epottier/IA/Othello_IA/src/main.cpp
+	"board.h"
+	"display.h"
+	"play.h"
+	"game.h"
+
+1491315292 source:/home-reseau/epottier/IA/Othello_IA/src/play.cpp
+	"play.h"
+	<iostream>
+

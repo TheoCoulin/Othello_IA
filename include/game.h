@@ -10,8 +10,6 @@ class game
         game();
         virtual ~game();
         bool end_of_game(board b);
-        bool end_of_game_black(board b, play p);
-        bool end_of_game_white(board b, play p);
         int number_pieces(int player, board b);
 
     protected:
