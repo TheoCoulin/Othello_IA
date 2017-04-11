@@ -9,7 +9,7 @@ class game
     public:
         game();
         virtual ~game();
-        bool end_of_game(board b);
+        bool end_of_game(board b, int player);
         int number_pieces(int player, board b);
 
     protected:

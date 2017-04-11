@@ -22,7 +22,7 @@ int main()
 
     disp.print_board_term(b);
 
-    while(! g.end_of_game(b))
+    while(! (g.end_of_game(b, WHITE) && g.end_of_game(b, BLACK)) ) // Si aucun des joueurs ne peut jouer, la partie est terminee
     {
         cout << "number of blacks : " << g.number_pieces(BLACK, b) << endl;
         cout << "number of whites : " << g.number_pieces(WHITE, b) << endl;
@@ -30,11 +30,15 @@ int main()
         if(player == 1) cout << "black" << endl;
         else cout << "white" << endl;
 
-        do
-        {
-            p.ask_move(moves);
-        } while (! p.isValidMove(moves, player, b));
-      //  cout << "i : " << moves[0] << ", j : " << moves[1] << endl;
+		if (!g.end_of_game(b, player)) // Si le joueur courant ne peut pas jouer, on passe directement au tour du joueur suivant
+		{
+			do
+        	{
+            	p.ask_move(moves);
+        	} while (! p.isValidMove(moves, player, b));
+		}	
+      	
+		//  cout << "i : " << moves[0] << ", j : " << moves[1] << endl;
         b = p.updateBoard(b, moves, player, disp);
         if (player == BLACK) player = WHITE;
         else player = BLACK;

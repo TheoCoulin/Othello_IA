@@ -3,9 +3,11 @@
 
 using namespace std;
 
+play p;
+
 game::game()
 {
-    //ctor
+
 }
 
 game::~game()
@@ -13,19 +15,23 @@ game::~game()
     //dtor
 }
 
-bool game::end_of_game(board b)
+bool game::end_of_game(board b, int player)
 {
+	tabmove move;
+	bool end = true; // on considere aue la partie est finie
 
     for(int i = 0; i < SIZE; i++)
     {
         for(int j = 0; j < SIZE; j++)
         {
-            if(b.get_Board(i,j) != FREE) return false;
+			move[0] = i;
+			move[1] = j;
+            if(b.get_Board(i,j) == FREE && p.isValidMove(move, player, b)) end = false; // Si la case est vide mais qu'un coup est valide depuis celle-ci, on peut continuer a jouer : end passe a faux
         }
     }
 
-    cout << "partie finie" << endl;
-    return true;
+    if (end) cout << "partie finie" << endl;
+    return end;
 }
 
 

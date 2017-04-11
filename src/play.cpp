@@ -55,7 +55,7 @@ tabcount play::searchLineR(const tabmove& m, int player, board b) const
     if(m[1] == SIZE - 1 || b.get_Board(tab[1], m[1]+1) == FREE || b.get_Board(tab[1], m[1]+1) == player) return tab;
 
     int j = m[1] + 1;
-    while(b.get_Board(tab[1], j) != player && b.get_Board(tab[1], j) != FREE && j < SIZE)
+    while(b.get_Board(tab[1], j) != player && b.get_Board(tab[1], j) != FREE && j < SIZE - 1)
     {
         count ++;
         tab[2] = j + 1;
@@ -98,7 +98,7 @@ tabcount play::searchColD(const tabmove& m, int player, board b) const
     if(m[0] == SIZE - 1 || b.get_Board(m[0] + 1, m[1]) == FREE || b.get_Board(m[0] + 1, m[1]) == player) return tab;
 
     int i= m[0] + 1;
-    while (b.get_Board(i,m[1]) != player && b.get_Board(i, m[1]) != FREE && i < SIZE)
+    while (b.get_Board(i,m[1]) != player && b.get_Board(i, m[1]) != FREE && i < SIZE - 1)
     {
         count ++;
         tab[1] = i + 1;
@@ -209,7 +209,8 @@ bool play::isValidMove(const tabmove& m, int player, board b) const
     else
     {
         cout << "Nul" << endl;
-        cout << "tabLL" << searchLineL(m, player, b)[0] << searchLineL(m, player, b)[1] << searchLineL(m, player, b)[2] << endl;
+        /*
+				cout << "tabLL" << searchLineL(m, player, b)[0] << searchLineL(m, player, b)[1] << searchLineL(m, player, b)[2] << endl;
         cout << "tabLR" << searchLineR(m, player, b)[0] << searchLineR(m, player, b)[1] << searchLineR(m, player, b)[2] << endl;
         cout << "tabCD" <<  searchColD(m, player, b)[0] << searchColD(m, player, b)[1] << searchColD(m, player, b)[2] << endl;
         cout << "tabCU" << searchColU(m, player, b)[0] << searchColU(m, player, b)[1] << searchColU(m, player, b)[2] << endl;
@@ -217,6 +218,7 @@ bool play::isValidMove(const tabmove& m, int player, board b) const
         cout << "tabDLU" << searchDiagLU(m, player, b)[0] << searchDiagLU(m, player, b)[1] << searchDiagLU(m, player, b)[2] << endl;
         cout << "tabDLD" << searchDiagLD(m, player, b)[0] << searchDiagLD(m, player, b)[1] <<searchDiagLD(m, player, b)[2] << endl;
         cout << "tabDRU" << searchDiagRU(m, player, b)[0] << searchDiagRU(m, player, b)[1] << searchDiagRU(m, player, b)[2] << endl;
+				*/
         return false;
     }
 }
