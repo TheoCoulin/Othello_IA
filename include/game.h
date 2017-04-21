@@ -11,6 +11,7 @@ class game
         virtual ~game();
         bool end_of_game(board b, int player);
         int number_pieces(int player, board b);
+        int winner(board b);
 
     protected:
 

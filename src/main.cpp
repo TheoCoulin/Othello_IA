@@ -17,12 +17,15 @@ int main()
 
     int player = BLACK;
 
-    cout << LEFT_UP_START << " = LUS" << endl;
-    cout << RIGHT_DOWN_START << " = RDS" << endl;
+  //  cout << LEFT_UP_START << " = LUS" << endl;
+   // cout << RIGHT_DOWN_START << " = RDS" << endl;
+
+    cout << "For each move, enter first the row, then the column" << endl;
+    cout << endl;
 
     disp.print_board_term(b);
 
-    while(! (g.end_of_game(b, WHITE) && g.end_of_game(b, BLACK)) ) // Si aucun des joueurs ne peut jouer, la partie est terminee
+    while(!g.end_of_game(b, WHITE) || !g.end_of_game(b, BLACK))
     {
         cout << "number of blacks : " << g.number_pieces(BLACK, b) << endl;
         cout << "number of whites : " << g.number_pieces(WHITE, b) << endl;
@@ -30,19 +33,19 @@ int main()
         if(player == 1) cout << "black" << endl;
         else cout << "white" << endl;
 
-		if (!g.end_of_game(b, player)) // Si le joueur courant ne peut pas jouer, on passe directement au tour du joueur suivant
-		{
-			do
-        	{
-            	p.ask_move(moves);
-        	} while (! p.isValidMove(moves, player, b));
-		}	
-      	
-		//  cout << "i : " << moves[0] << ", j : " << moves[1] << endl;
+        do
+        {
+            p.ask_move(moves);
+            if(! p.isValidMove(moves,player,b)) cout << "Try again" << endl;
+        } while (! p.isValidMove(moves, player, b));
+      //  cout << "i : " << moves[0] << ", j : " << moves[1] << endl;
         b = p.updateBoard(b, moves, player, disp);
-        if (player == BLACK) player = WHITE;
-        else player = BLACK;
+        if (player == BLACK && !g.end_of_game(b, WHITE)) player = WHITE;
+        else if (player == WHITE && !g.end_of_game(b, BLACK)) player = BLACK;
     }
+    cout << "number of blacks: " << g.number_pieces(BLACK, b) << endl;
+    cout << "number of whites: " << g.number_pieces(WHITE, b) << endl;
+    g.winner(b);
 
     return 0;
 }
