@@ -3,7 +3,7 @@ A modifier :
 Dans la classe board :
 	- Mettre le nombre de pièces (qui est dans la classe game). (Pour plus tard ajouter un 
 attribut nb de pièces jouées, pour pouvoir faire nbPieces - nbBLACK = nbWHITE) -----------FAIT (Pas l'attribut) 
-	- Mettre le updateBoard (qui est dans la classe play) et modifier.
+	- Mettre le updateBoard (qui est dans la classe play) et modifier. --------- FAIT (dans la classe game).
 
 Dans la classe play: 
 	- Bizarre. Ajouter les fonctions play et undo de l'IA.

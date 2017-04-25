@@ -11,6 +11,7 @@ class game
         virtual ~game();
         bool end_of_game(int player);
         int winner();
+        void updateBoard(const tabmove& m, int player);
         board b;
 
     protected:

@@ -36,10 +36,11 @@ int main()
         do
         {
             p.ask_move(moves);
-            if(! p.isValidMove(moves,player,b)) cout << "Try again" << endl;
-        } while (! p.isValidMove(moves, player, b));
+            if(! p.isValidMove(moves,player,g.b)) cout << "Try again" << endl;
+        } while (! p.isValidMove(moves, player, g.b));
         //  cout << "i : " << moves[0] << ", j : " << moves[1] << endl;
-        b = p.updateBoard(b, moves, player, disp);
+        g.updateBoard(moves, player);
+        disp.print_board_term(g.b);
         if (player == BLACK && !g.end_of_game(WHITE)) player = WHITE;
         else if (player == WHITE && !g.end_of_game(BLACK)) player = BLACK;
     }
