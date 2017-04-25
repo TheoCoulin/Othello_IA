@@ -13,7 +13,7 @@ int main()
     play p;
     tabmove moves;
     moves.fill(0);
-    game g;
+    game g (b);
 
     int player = BLACK;
 
@@ -23,12 +23,12 @@ int main()
     cout << "For each move, enter first the row, then the column" << endl;
     cout << endl;
 
-    disp.print_board_term(b);
+    disp.print_board_term(g.b);
 
-    while(!g.end_of_game(b, WHITE) || !g.end_of_game(b, BLACK))
+    while(!g.end_of_game(WHITE) || !g.end_of_game(BLACK))
     {
-        cout << "number of blacks : " << g.number_pieces(BLACK, b) << endl;
-        cout << "number of whites : " << g.number_pieces(WHITE, b) << endl;
+        cout << "number of blacks : " << g.b.number_pieces(BLACK) << endl;
+        cout << "number of whites : " << g.b.number_pieces(WHITE) << endl;
         cout << "it's your turn ";
         if(player == 1) cout << "black" << endl;
         else cout << "white" << endl;
@@ -38,14 +38,14 @@ int main()
             p.ask_move(moves);
             if(! p.isValidMove(moves,player,b)) cout << "Try again" << endl;
         } while (! p.isValidMove(moves, player, b));
-      //  cout << "i : " << moves[0] << ", j : " << moves[1] << endl;
+        //  cout << "i : " << moves[0] << ", j : " << moves[1] << endl;
         b = p.updateBoard(b, moves, player, disp);
-        if (player == BLACK && !g.end_of_game(b, WHITE)) player = WHITE;
-        else if (player == WHITE && !g.end_of_game(b, BLACK)) player = BLACK;
+        if (player == BLACK && !g.end_of_game(WHITE)) player = WHITE;
+        else if (player == WHITE && !g.end_of_game(BLACK)) player = BLACK;
     }
-    cout << "number of blacks: " << g.number_pieces(BLACK, b) << endl;
-    cout << "number of whites: " << g.number_pieces(WHITE, b) << endl;
-    g.winner(b);
+    cout << "number of blacks: " << g.b.number_pieces(BLACK) << endl;
+    cout << "number of whites: " << g.b.number_pieces(WHITE) << endl;
+    g.winner();
 
     return 0;
 }

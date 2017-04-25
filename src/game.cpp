@@ -5,9 +5,9 @@ using namespace std;
 
 play p;
 
-game::game()
+game::game(board bo)
 {
-
+    b = bo;
 }
 
 game::~game()
@@ -15,7 +15,7 @@ game::~game()
     //dtor
 }
 
-bool game::end_of_game(board b, int player)
+bool game::end_of_game(int player)
 {
 	tabmove move;
 	bool end = true; // on considere que la partie est finie
@@ -40,31 +40,12 @@ bool game::end_of_game(board b, int player)
     return end;
 }
 
-
-
-
-int game::number_pieces(int player, board b)
+int game::winner()
 {
-    int res = 0;
-
-    for(int i = 0; i < SIZE; i++)
-    {
-        for(int j = 0; j < SIZE; j++)
-        {
-            if(b.get_Board(i,j) == player) res ++;
-        }
-    }
-
-    return res;
-}
-
-
-int game::winner(board b)
-{
-    if(end_of_game(b, WHITE) && end_of_game(b, BLACK))
+    if(end_of_game(WHITE) && end_of_game(BLACK))
     {
         cout << "End of game !" << endl;
-        if(number_pieces(WHITE,b) > number_pieces(BLACK,b))
+        if(b.number_pieces(WHITE) > b.number_pieces(BLACK))
         {
             cout << "Whites win" << endl;
             return WHITE;

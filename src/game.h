@@ -7,15 +7,16 @@
 class game
 {
     public:
-        game();
+        game(board bo);
         virtual ~game();
-        bool end_of_game(board b, int player);
-        int number_pieces(int player, board b);
-        int winner(board b);
+        bool end_of_game(int player);
+        int winner();
+        board b;
 
     protected:
 
     private:
+    	
 };
 
 #endif // GAME_H

@@ -2,7 +2,7 @@ A modifier :
 
 Dans la classe board :
 	- Mettre le nombre de pièces (qui est dans la classe game). (Pour plus tard ajouter un 
-attribut nb de pièces jouées, pour pouvoir faire nbPieces - nbBLACK = nbWHITE
+attribut nb de pièces jouées, pour pouvoir faire nbPieces - nbBLACK = nbWHITE) -----------FAIT (Pas l'attribut) 
 	- Mettre le updateBoard (qui est dans la classe play) et modifier.
 
 Dans la classe play: 

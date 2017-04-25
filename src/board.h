@@ -21,6 +21,7 @@ class board
 
         int get_Board(int i, int j) const;
         void set_Board(int i, int j, int value);
+        int number_pieces(int player);
     protected:
 
     private:
