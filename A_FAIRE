@@ -19,4 +19,4 @@ classe Game (?).
 
 
 /!\ - Que faire de ce qui est dans la classe play ???????? Une classe moves ? Pour y mettre la 
-sdd de gardage en mémoire des coups tavu.
+sdd de gardage en mémoire des coups tavu. ----------------------------- FAIT la création de la classe moves (avec un s sinon car un move existe déjà en C++)

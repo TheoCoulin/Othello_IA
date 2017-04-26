@@ -10,10 +10,9 @@ int main()
 
     board b;
     display disp;
-    play p;
-    tabmove moves;
-    moves.fill(0);
+    moves mo;
     game g (b);
+    play p;
 
     int player = BLACK;
 
@@ -32,17 +31,21 @@ int main()
         cout << "it's your turn ";
         if(player == 1) cout << "black" << endl;
         else cout << "white" << endl;
-
-        do
-        {
-            p.ask_move(moves);
-            if(! p.isValidMove(moves,player,g.b)) cout << "Try again" << endl;
-        } while (! p.isValidMove(moves, player, g.b));
-        //  cout << "i : " << moves[0] << ", j : " << moves[1] << endl;
-        g.updateBoard(moves, player);
+	
+	//p.make_move(mo, player, g.b);
+    tabmove moves;
+    moves.fill(0);
+    
+	do
+    {
+     	mo.ask_move(moves);
+     	if(! mo.isValidMove(moves,player,g.b)) cout << "Try again" << endl;
+     } while (! mo.isValidMove(moves, player, g.b));
+     g.updateBoard(moves, player);
+ 
+	
         disp.print_board_term(g.b);
-        if (player == BLACK && !g.end_of_game(WHITE)) player = WHITE;
-        else if (player == WHITE && !g.end_of_game(BLACK)) player = BLACK;
+        player = g.switch_player(player);
     }
     cout << "number of blacks: " << g.b.number_pieces(BLACK) << endl;
     cout << "number of whites: " << g.b.number_pieces(WHITE) << endl;

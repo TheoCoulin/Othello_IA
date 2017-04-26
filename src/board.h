@@ -8,7 +8,7 @@
     static const int FREE = -1;
     static const int WHITE = 0;
     static const int BLACK = 1;
-    static const int SIZE = 4;
+    static const int SIZE = 8;
     static const int LEFT_UP_START = (SIZE/2) - 1;
     static const int RIGHT_DOWN_START = (SIZE/2);
 
@@ -22,7 +22,6 @@ class board
         int get_Board(int i, int j) const;
         void set_Board(int i, int j, int value);
         int number_pieces(int player);
-    protected:
 
     private:
         int game_board[SIZE][SIZE];

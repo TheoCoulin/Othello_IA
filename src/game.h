@@ -2,7 +2,7 @@
 #define GAME_H
 #include "board.h"
 #include "display.h"
-#include "play.h"
+#include "moves.h"
 
 class game
 {
@@ -12,12 +12,8 @@ class game
         bool end_of_game(int player);
         int winner();
         void updateBoard(const tabmove& m, int player);
-        board b;
-
-    protected:
-
-    private:
-    	
+	int switch_player(int player);        
+	board b;
 };
 
 #endif // GAME_H
