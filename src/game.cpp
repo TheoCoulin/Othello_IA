@@ -165,5 +165,8 @@ void game::switch_player()
 	player = -player;
 }
 
-
-        
+int game::opposite_Player()
+{
+    return -player;
+}
+       

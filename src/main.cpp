@@ -41,7 +41,7 @@ int main()
  
 	
         disp.print_board_term(g.b);
-        g.switch_player();
+        if (!g.end_of_game(g.opposite_Player())) g.switch_player();
     }
     cout << "number of blacks: " << g.b.number_pieces(BLACK) << endl;
     cout << "number of whites: " << g.b.number_pieces(WHITE) << endl;

@@ -15,7 +15,8 @@ class game
         int winner();
         void updateBoard(const tabmove& m, int player);
 		int get_Player();
-		void switch_player();        
+		void switch_player();
+		int opposite_Player();        
 		board b;
 
 	private:
