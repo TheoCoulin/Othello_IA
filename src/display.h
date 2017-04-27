@@ -8,9 +8,6 @@ class display
         display();
         virtual ~display();
         void print_board_term(board b);
-    protected:
-
-    private:
 };
 
 #endif // DISPLAY_H

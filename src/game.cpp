@@ -3,11 +3,12 @@
 
 using namespace std;
 
-play p;
+moves mo;
 
-game::game(board bo)
+game::game(board bo, int p)
 {
     b = bo;
+    player = p;
 }
 
 game::~game()
@@ -27,16 +28,13 @@ bool game::end_of_game(int player)
         {
             move[0] = i;
             move[1] = j;
-            if(b.get_Board(i,j) == FREE && p.isValidMove(move, player, b))
-            {
-                //cout << player << " : " << i << ", " << j << endl;
+            if(b.get_Board(i,j) == FREE && mo.isValidMove(move, player, b))
                 end = false; // Si la case est vide mais qu'un coup est valide depuis celle-ci, on peut continuer a jouer : end passe a faux
-            }
             j++;
         }
     }
 
-    if (end) cout << player <<" : no more moves" << endl;
+    // if (end) cout << player <<" : no more moves" << endl;
     return end;
 }
 
@@ -73,32 +71,28 @@ void game::updateBoard(const tabmove& m, int player)
     int i, j;
     tabcount tab;
 
-    tab = p.searchLineL(m, player, b);
-  //  cout << "tabLL : " << tab[0] << tab[1] << tab[2] << endl;
+    tab = mo.searchLineL(m, player, b);
     if(tab[0] != 0)
     {
         for(j = m[1]; j > tab[2]; j--)
             b.set_Board(m[0], j, player);
     }
 
-    tab = p.searchLineR(m, player, b);
- //   cout << "tabLR : " << tab[0] << tab[1] << tab[2] << endl;
+    tab = mo.searchLineR(m, player, b);
     if(tab[0] != 0)
     {
         for (j = m[1]; j < tab[2]; j++)
             b.set_Board(m[0], j, player);
     }
 
-    tab = p.searchColD(m, player, b);
-  //  cout << "tabCD : " << tab[0] << tab[1] << tab[2] << endl;
+    tab = mo.searchColD(m, player, b);
     if(tab[0] != 0)
     {
         for(int i = m[0]; i < tab[1]; i++)
             b.set_Board(i, m[1], player);
     }
 
-    tab = p.searchColU(m, player, b);
-  //  cout << "tabCU : " << tab[0] << tab[1] << tab[2] << endl;
+    tab = mo.searchColU(m, player, b);
     if(tab[0] != 0)
     {
         for(i = m[0]; i > tab[1]; i--)
@@ -106,8 +100,7 @@ void game::updateBoard(const tabmove& m, int player)
     }
 
 
-    tab = p.searchDiagRD(m, player, b);
- //   cout << "tabDRD : " << tab[0] << tab[1] << tab[2] << endl;
+    tab = mo.searchDiagRD(m, player, b);
     if(tab[0] != 0)
     {
         i = m[0];
@@ -120,8 +113,7 @@ void game::updateBoard(const tabmove& m, int player)
         }
     }
 
-    tab = p.searchDiagLD(m, player, b);
- //   cout << "tabDLD : " << tab[0] << tab[1] << tab[2] << endl;
+    tab = mo.searchDiagLD(m, player, b);
     if(tab[0] != 0)
     {
         i = m[0];
@@ -135,8 +127,7 @@ void game::updateBoard(const tabmove& m, int player)
     }
 
 
-    tab = p.searchDiagRU(m, player, b);
-  //  cout << "tabDRU : " << tab[0] << tab[1] << tab[2] << endl;
+    tab = mo.searchDiagRU(m, player, b);
     if(tab[0] != 0)
     {
         i = m[0];
@@ -150,8 +141,7 @@ void game::updateBoard(const tabmove& m, int player)
     }
 
 
-    tab = p.searchDiagLU(m, player, b);
-    //cout << "tabDLU : " << tab[0] << tab[1] << tab[2] << endl;
+    tab = mo.searchDiagLU(m, player, b);
     if(tab[0] !=0)
     {
         i = m[0];
@@ -164,3 +154,19 @@ void game::updateBoard(const tabmove& m, int player)
         }
     }
 }
+
+int game::get_Player()
+{
+    return player;
+}
+
+void game::switch_player()
+{
+	player = -player;
+}
+
+int game::opposite_Player()
+{
+    return -player;
+}
+       

@@ -10,15 +10,11 @@ int main()
 
     board b;
     display disp;
-    play p;
-    tabmove moves;
-    moves.fill(0);
-    game g (b);
+    moves mo;
+    game g (b, BLACK);
 
-    int player = BLACK;
-
-  //  cout << LEFT_UP_START << " = LUS" << endl;
-   // cout << RIGHT_DOWN_START << " = RDS" << endl;
+    //  cout << LEFT_UP_START << " = LUS" << endl;
+    // cout << RIGHT_DOWN_START << " = RDS" << endl;
 
     cout << "For each move, enter first the row, then the column" << endl;
     cout << endl;
@@ -30,19 +26,22 @@ int main()
         cout << "number of blacks : " << g.b.number_pieces(BLACK) << endl;
         cout << "number of whites : " << g.b.number_pieces(WHITE) << endl;
         cout << "it's your turn ";
-        if(player == 1) cout << "black" << endl;
+        if(g.get_Player() == 1) cout << "black" << endl;
         else cout << "white" << endl;
-
-        do
-        {
-            p.ask_move(moves);
-            if(! p.isValidMove(moves,player,g.b)) cout << "Try again" << endl;
-        } while (! p.isValidMove(moves, player, g.b));
-        //  cout << "i : " << moves[0] << ", j : " << moves[1] << endl;
-        g.updateBoard(moves, player);
+	
+    tabmove mov;
+    mov.fill(0);
+    
+	do
+    {
+     	mo.ask_move(mov);
+     	if(! mo.isValidMove(mov,g.get_Player(),g.b)) cout << "Try again" << endl;
+     } while (! mo.isValidMove(mov, g.get_Player(), g.b));
+     g.updateBoard(mov, g.get_Player());
+ 
+	
         disp.print_board_term(g.b);
-        if (player == BLACK && !g.end_of_game(WHITE)) player = WHITE;
-        else if (player == WHITE && !g.end_of_game(BLACK)) player = BLACK;
+        if (!g.end_of_game(g.opposite_Player())) g.switch_player();
     }
     cout << "number of blacks: " << g.b.number_pieces(BLACK) << endl;
     cout << "number of whites: " << g.b.number_pieces(WHITE) << endl;
