@@ -2,20 +2,25 @@
 #define GAME_H
 #include "board.h"
 #include "display.h"
-#include "play.h"
+#include "moves.h"
 
 class game
 {
     public:
-        game();
+        game(board bo, int p);
         virtual ~game();
-        bool end_of_game(board b, int player);
-        int number_pieces(int player, board b);
-        int winner(board b);
 
-    protected:
+        void game_loop();
+        bool end_of_game(int player);
+        int winner();
+        void updateBoard(const tabmove& m, int player);
+		int get_Player();
+		void switch_player();
+		int opposite_Player();        
+		board b;
 
-    private:
+	private:
+		int player;
 };
 
 #endif // GAME_H

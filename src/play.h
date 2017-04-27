@@ -2,7 +2,8 @@
 #define PLAY_H
 #include <array>
 #include "board.h"
-#include "display.h"
+#include "moves.h"
+#include "game.h"
 
 class play
 {
@@ -10,21 +11,7 @@ class play
     public:
         play();
         virtual ~play();
-        tabmove ask_move(tabmove& m);
-        tabcount searchLineL(const tabmove& m, int player, board b) const;
-        tabcount searchLineR(const tabmove& m, int player, board b) const;
-        tabcount searchColD(const tabmove& m, int player, board b) const;
-        tabcount searchColU(const tabmove& m, int player, board b) const;
-        tabcount searchDiagRD(const tabmove& m, int player, board b) const;
-        tabcount searchDiagLD(const tabmove& m, int player, board b) const;
-        tabcount searchDiagRU(const tabmove& m, int player, board b) const;
-        tabcount searchDiagLU(const tabmove& m, int player, board b) const;
-        bool isValidMove(const tabmove& m, int player, board b) const;
-        board updateBoard(board b, const tabmove& m, int player, display disp);
-
-    protected:
-
-    private:
+	void make_move(moves mo, int player, game g);
 };
 
 #endif // PLAY_H

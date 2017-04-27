@@ -6,6 +6,7 @@
 
 using namespace std;
 
+
 board::board()
 {
     /*
@@ -33,12 +34,41 @@ board::~board()
     //dtor
 }
 
+/*********************************
+*	Function used to get the state 
+*	of a given case on the board
+**********************************/
 int board::get_Board(int i, int j) const
 {
     return game_board[i][j];
 }
 
+/*********************************
+*	Function used to set the state 
+*	of a given case on the board, 
+*	with the value passed as a
+*	parameter.
+**********************************/
 void board::set_Board(int i, int j, int value)
 {
     game_board[i][j] = value;
+}
+
+/**********************************
+*	Function to compute the number
+*	of pieces of a given player
+***********************************/
+int board::number_pieces(int player)
+{
+    int res = 0;
+
+    for(int i = 0; i < SIZE; i++)
+    {
+        for(int j = 0; j < SIZE; j++)
+        {
+            if(game_board[i][j] == player) res ++;
+        }
+    }
+
+    return res;
 }

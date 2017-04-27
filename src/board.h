@@ -5,8 +5,8 @@
 
     typedef std::array<int, 2> tabmove;
     typedef std::array<int,3> tabcount;
-    static const int FREE = -1;
-    static const int WHITE = 0;
+    static const int FREE = 0;
+    static const int WHITE = -1;
     static const int BLACK = 1;
     static const int SIZE = 4;
     static const int LEFT_UP_START = (SIZE/2) - 1;
@@ -21,7 +21,7 @@ class board
 
         int get_Board(int i, int j) const;
         void set_Board(int i, int j, int value);
-    protected:
+        int number_pieces(int player);
 
     private:
         int game_board[SIZE][SIZE];

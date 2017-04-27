@@ -2,8 +2,8 @@ A modifier :
 
 Dans la classe board :
 	- Mettre le nombre de pièces (qui est dans la classe game). (Pour plus tard ajouter un 
-attribut nb de pièces jouées, pour pouvoir faire nbPieces - nbBLACK = nbWHITE
-	- Mettre le updateBoard (qui est dans la classe play) et modifier.
+attribut nb de pièces jouées, pour pouvoir faire nbPieces - nbBLACK = nbWHITE) -----------FAIT (Pas l'attribut) 
+	- Mettre le updateBoard (qui est dans la classe play) et modifier. --------- FAIT (dans la classe game).
 
 Dans la classe play: 
 	- Bizarre. Ajouter les fonctions play et undo de l'IA.
@@ -15,8 +15,8 @@ Dans la classe Game :
 	
 Dans le Board.h :
 	- Changer les valeurs de WHITE et BLACK, pour pouvoir faire une fonction switchPlayer dans la
-classe Game (?).
+classe Game (?). ---------- FAIT, avec switchplayer qui fait simplement player = -player.
 
 
 /!\ - Que faire de ce qui est dans la classe play ???????? Une classe moves ? Pour y mettre la 
-sdd de gardage en mémoire des coups tavu.
+sdd de gardage en mémoire des coups tavu. ----------------------------- FAIT la création de la classe moves (avec un s sinon car un move existe déjà en C++)
