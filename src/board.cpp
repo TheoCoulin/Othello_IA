@@ -9,16 +9,7 @@ using namespace std;
 
 board::board()
 {
-    /*
-    *for (int i = 0; i < SIZE; i++) {
-    *   for (int j = 0; j < SIZE; j++) {
-    *       if (i == 0 || i == 3 || j == 0 || j == 3) game_board[i][j] = FREE;
-    *       else if (i == j) game_board[i][j] = BLACK;
-    *       else game_board[i][j] = WHITE;
-    *   }
-    *}
-    */
-
+    
     for (int i = 0; i < SIZE; i++) {
         for (int j = 0; j < SIZE; j++) {
             game_board[i][j] = FREE;
