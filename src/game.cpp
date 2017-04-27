@@ -5,15 +5,57 @@ using namespace std;
 
 moves mo;
 
-game::game(board bo, int p)
+game::game()
 {
-    b = bo;
-    player = p;
+    // The first player is always Black pieces
+    player = BLACK;
 }
 
 game::~game()
 {
     //dtor
+}
+
+void game::game_loop()
+{
+    cout << "For each move, enter first the row, then the column" << endl;
+    cout << endl;
+
+    disp.print_board_term(b);
+
+    // While one of the players can play, the game continues
+    while(!end_of_game(WHITE) || !end_of_game(BLACK))
+    {
+        cout << "number of blacks : " << b.number_pieces(BLACK) << endl;
+        cout << "number of whites : " << b.number_pieces(WHITE) << endl;
+        cout << "it's your turn ";
+        if(get_Player() == 1) cout << "black" << endl;
+        else cout << "white" << endl;
+
+        tabmove mov;
+        mov.fill(0);
+        
+        // Loop to get a valid move from the human player
+        do
+        {
+            mo.ask_move(mov);
+            if(! mo.isValidMove(mov, get_Player(), b)) cout << "Try again" << endl;
+        } while (! mo.isValidMove(mov, get_Player(), b));
+
+        // When we have a valid move in the array mov, we update the board
+        updateBoard(mov);
+        // Then we print the board using the display
+        disp.print_board_term(b);
+
+        //Then, we switch the player, only if the player to come has a valid move
+        if (!end_of_game(opposite_Player())) switch_player();
+    } // End of the game loop
+
+    // Here the game is finished, we print the final number of pieces for each player
+    cout << "number of blacks: " << b.number_pieces(BLACK) << endl;
+    cout << "number of whites: " << b.number_pieces(WHITE) << endl;
+    // Here we determine the winner and print it
+    winner();
 }
 
 bool game::end_of_game(int player)
@@ -66,7 +108,7 @@ int game::winner()
 *   Problem with all the diagonals. 
 *   It doesn't display anything..
 *******************************************************/
-void game::updateBoard(const tabmove& m, int player)
+void game::updateBoard(const tabmove& m)
 {
     int i, j;
     tabcount tab;
@@ -149,6 +191,95 @@ void game::updateBoard(const tabmove& m, int player)
         while(i > tab[1] && j > tab[2])
         {
             b.set_Board(i, j, player);
+            i--;
+            j--;
+        }
+    }
+}
+
+void game::updateBoard(const tabmove& m, int p)
+{
+    int i, j;
+    tabcount tab;
+
+    tab = mo.searchLineL(m, p, b);
+    if(tab[0] != 0)
+    {
+        for(j = m[1]; j > tab[2]; j--)
+            b.set_Board(m[0], j, p);
+    }
+
+    tab = mo.searchLineR(m, p, b);
+    if(tab[0] != 0)
+    {
+        for (j = m[1]; j < tab[2]; j++)
+            b.set_Board(m[0], j, p);
+    }
+
+    tab = mo.searchColD(m, p, b);
+    if(tab[0] != 0)
+    {
+        for(int i = m[0]; i < tab[1]; i++)
+            b.set_Board(i, m[1], p);
+    }
+
+    tab = mo.searchColU(m, p, b);
+    if(tab[0] != 0)
+    {
+        for(i = m[0]; i > tab[1]; i--)
+            b.set_Board(i, m[1], p);
+    }
+
+
+    tab = mo.searchDiagRD(m, p, b);
+    if(tab[0] != 0)
+    {
+        i = m[0];
+        j = m[1];
+        while (i < tab[1] && j < tab[2])
+        {
+            b.set_Board(i, j, p);
+            i++;
+            j++;
+        }
+    }
+
+    tab = mo.searchDiagLD(m, p, b);
+    if(tab[0] != 0)
+    {
+        i = m[0];
+        j = m[1];
+        while(i < tab[1] && j > tab[2])
+        {
+            b.set_Board(i, j, p);
+            i++;
+            j--;
+        }
+    }
+
+
+    tab = mo.searchDiagRU(m, p, b);
+    if(tab[0] != 0)
+    {
+        i = m[0];
+        j = m[1];
+        while(i > tab[1] && j < tab[2])
+        {
+            b.set_Board(i, j, p);
+            i--;
+            j++;
+        }
+    }
+
+
+    tab = mo.searchDiagLU(m, p, b);
+    if(tab[0] !=0)
+    {
+        i = m[0];
+        j = m[1];
+        while(i > tab[1] && j > tab[2])
+        {
+            b.set_Board(i, j, p);
             i--;
             j--;
         }
