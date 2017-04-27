@@ -5,9 +5,10 @@ using namespace std;
 
 moves mo;
 
-game::game(board bo)
+game::game(board bo, int p)
 {
     b = bo;
+    player = p;
 }
 
 game::~game()
@@ -154,14 +155,14 @@ void game::updateBoard(const tabmove& m, int player)
     }
 }
 
-
-int game::switch_player(int player)
+int game::get_Player()
 {
-	if (player == BLACK && !end_of_game(WHITE)) 
-		player = WHITE;
-        else if (player == WHITE && !end_of_game(BLACK))
-        	player = BLACK;
-        return player;
+    return player;
+}
+
+void game::switch_player()
+{
+	player = -player;
 }
 
 

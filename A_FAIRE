@@ -15,7 +15,7 @@ Dans la classe Game :
 	
 Dans le Board.h :
 	- Changer les valeurs de WHITE et BLACK, pour pouvoir faire une fonction switchPlayer dans la
-classe Game (?).
+classe Game (?). ---------- FAIT, avec switchplayer qui fait simplement player = -player.
 
 
 /!\ - Que faire de ce qui est dans la classe play ???????? Une classe moves ? Pour y mettre la 
