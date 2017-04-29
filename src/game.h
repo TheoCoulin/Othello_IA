@@ -20,16 +20,16 @@ class game
         
         void updateBoard(const tabmove& m);
 
-        list<tabmove> get_Moves();
+        board getBoard();
 
 		int get_Player();
 		void switch_player();
 		int opposite_Player();        
 		
-		board b;
 		
 
 	private:
+		board b;
 		int player;
 		display disp;
 		moves mo;

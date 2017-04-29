@@ -5,19 +5,28 @@ Dans la classe board :
 attribut nb de pièces jouées, pour pouvoir faire nbPieces - nbBLACK = nbWHITE) 		----------- FAIT (Pas l'attribut) 
 	- Mettre le updateBoard (qui est dans la classe play) et modifier. 							----------- FAIT (dans la classe game).
 
-Dans la classe play: 
-	- Bizarre. Ajouter les fonctions play et undo de l'IA.
+Dans la classe moves: 
+	- Bizarre. Ajouter les fonctions play et undo de l'IA. ------- Pas forcément besoin de play si tout se fait dans le game_loop() de la classe game.
 	- Voir la structure à utiliser pour garder les coups en mémoire et pouvoir naviguer dans 
-l'arbre. 
+l'arbre. 																				--------- PAS BESOIN NORMALEMENT, car le undo se fait dans la fonction findBestMove.
 	- Faire une fonction permettant d'avoir tous les moves
-possibles depuis l'etat courant du board.
+possibles depuis l'etat courant du board. 			------- FAIT.
+	- BOSSER SUR L'HEURISTIQUE, QUAND ON AURA FAIT LE MINIMAX (ou avant j'en sais rien, mais ca va donner de la lecture !)
+				------> https://courses.cs.washington.edu/courses/cse573/04au/Project/mini1/RUSSIA/Final_Paper.pdf
+				------> https://kartikkukreja.wordpress.com/2013/03/30/heuristic-function-for-reversiothello/
 
-	POSSIBILITES pour le undo : au debut de la fonction play de l'ai, creer une copie du baord. Dans la fonction, on fait le move donné,
-	donc on update le board du jeu, puis on appelle minimax.
-	Juste apres, on remet le board comme avant !
-	OU ALORS, stocker les coordonnees du pion placé et celle des pions qui ont servi à prendre des pions adverses (plus compliqué).
+------------ Ce que j'ai fait pour le undo : cf fonction moves::findBestMove(board b, int player). J'ai copié le board pour le reset après l'appel du minimax.
+
+POSSIBILITES POUR LE UNDO : 
+			- au debut de la fonction play de l'ai, creer une copie du baord. Dans la fonction, on fait le move donné,
+	donc on update le board du jeu, puis on appelle minimax. Et juste apres, on remet le board comme avant !
+	
+			- OU ALORS, stocker les coordonnees du pion placé et celle des pions qui ont servi à prendre des pions adverses (plus compliqué).
+	
 	---> https://coderanch.com/t/200906/java/Reversi-Othello : la réponse de Warren Dew, et celle de Jessica Sant, la plus compliquéé.
-	---> http://www.geeksforgeeks.org/minimax-algorithm-in-game-theory-set-3-tic-tac-toe-ai-finding-optimal-move/ : Utile pour comprendre le fonctionnement de la fonction play() qu'on a à faire.
+				OSEF UN PEU DU COUP, SAUF SI TU VEUX CHANGER LA MANIERE DE RESET CHAQUE COUP.
+	
+	---> http://www.geeksforgeeks.org/minimax-algorithm-in-game-theory-set-3-tic-tac-toe-ai-finding-optimal-move/ : Utile pour comprendre le fonctionnement de la fonction play() qu'on a à faire. VA VOIR CA C'EST BIEN EXPLIQUE !!!!!
 
 
 

@@ -32,11 +32,11 @@ void game::game_loop()
         double duration;
         start = clock();    
 
-        list<tabmove> possibleMoves = get_Moves();
+        list<tabmove> possibleMoves = mo.get_Moves(b, player);
 
         duration = ( std::clock() - start ) / (double) CLOCKS_PER_SEC;
         cout << "time to get moves : " << duration << " sec" << endl;
-        // 10e-5 seconds average, to get all the possible moves.
+        // 10e-4 seconds average, to get all the possible moves.
 
         cout << "number of blacks : " << b.number_pieces(BLACK) << endl;
         cout << "number of whites : " << b.number_pieces(WHITE) << endl;
@@ -210,29 +210,9 @@ void game::updateBoard(const tabmove& m)
     }
 }
 
-/***********************************
-*   Function that return all 
-*   the possible moves of the
-*   current player in a list of
-*   "tabmove" arrays : [0] : i
-*   coordinate of the move,
-*   [1] : j coordinate of the move
-***********************************/
-
-list<tabmove> game::get_Moves()
+board game::getBoard()
 {
-    list<tabmove> possibleMoves;
-    tabmove m;
-    for (int i = 0; i < SIZE; i++)
-    {
-        m[0] = i;
-        for (int j = 0; j< SIZE; j++)
-        {
-            m[1] = j;
-            if (mo.isValidMove(m, player, b)) possibleMoves.push_back(m); 
-        }
-    }
-    return possibleMoves;
+    return b;
 }
 
 int game::get_Player()
