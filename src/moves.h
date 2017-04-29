@@ -2,6 +2,9 @@
 #define MOVE_H
 #include <array>
 #include "board.h"
+#include <list>
+
+using namespace std;
 
 class moves
 {
@@ -20,6 +23,8 @@ class moves
         tabcount searchDiagLU(const tabmove& m, int player, board b) const;
         bool isValidMove(const tabmove& m, int player, board b) const;
 
+        list<tabmove> get_Moves(board b, int player);
+        tabmove findBestMove(board b, int player);
 };
 
 #endif // MOVE_H

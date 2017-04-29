@@ -3,6 +3,10 @@
 #include "board.h"
 #include "display.h"
 #include "moves.h"
+#include <list>
+#include <ctime>
+
+using namespace std;
 
 class game
 {
@@ -13,15 +17,19 @@ class game
         void game_loop();
         bool end_of_game(int player);
         int winner();
+        
         void updateBoard(const tabmove& m);
-        void updateBoard(const tabmove& m, int player);
+
+        board getBoard();
+
 		int get_Player();
 		void switch_player();
 		int opposite_Player();        
-		board b;
+		
 		
 
 	private:
+		board b;
 		int player;
 		display disp;
 		moves mo;

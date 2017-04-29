@@ -25,7 +25,19 @@ void game::game_loop()
 
     // While one of the players can play, the game continues
     while(!end_of_game(WHITE) || !end_of_game(BLACK))
-    {
+    {   
+
+        // Clock to see how much time it takes to get the moves
+        clock_t start;
+        double duration;
+        start = clock();    
+
+        list<tabmove> possibleMoves = mo.get_Moves(b, player);
+
+        duration = ( std::clock() - start ) / (double) CLOCKS_PER_SEC;
+        cout << "time to get moves : " << duration << " sec" << endl;
+        // 10e-4 seconds average, to get all the possible moves.
+
         cout << "number of blacks : " << b.number_pieces(BLACK) << endl;
         cout << "number of whites : " << b.number_pieces(WHITE) << endl;
         cout << "it's your turn ";
@@ -44,6 +56,7 @@ void game::game_loop()
 
         // When we have a valid move in the array mov, we update the board
         updateBoard(mov);
+
         // Then we print the board using the display
         disp.print_board_term(b);
 
@@ -197,93 +210,9 @@ void game::updateBoard(const tabmove& m)
     }
 }
 
-void game::updateBoard(const tabmove& m, int p)
+board game::getBoard()
 {
-    int i, j;
-    tabcount tab;
-
-    tab = mo.searchLineL(m, p, b);
-    if(tab[0] != 0)
-    {
-        for(j = m[1]; j > tab[2]; j--)
-            b.set_Board(m[0], j, p);
-    }
-
-    tab = mo.searchLineR(m, p, b);
-    if(tab[0] != 0)
-    {
-        for (j = m[1]; j < tab[2]; j++)
-            b.set_Board(m[0], j, p);
-    }
-
-    tab = mo.searchColD(m, p, b);
-    if(tab[0] != 0)
-    {
-        for(int i = m[0]; i < tab[1]; i++)
-            b.set_Board(i, m[1], p);
-    }
-
-    tab = mo.searchColU(m, p, b);
-    if(tab[0] != 0)
-    {
-        for(i = m[0]; i > tab[1]; i--)
-            b.set_Board(i, m[1], p);
-    }
-
-
-    tab = mo.searchDiagRD(m, p, b);
-    if(tab[0] != 0)
-    {
-        i = m[0];
-        j = m[1];
-        while (i < tab[1] && j < tab[2])
-        {
-            b.set_Board(i, j, p);
-            i++;
-            j++;
-        }
-    }
-
-    tab = mo.searchDiagLD(m, p, b);
-    if(tab[0] != 0)
-    {
-        i = m[0];
-        j = m[1];
-        while(i < tab[1] && j > tab[2])
-        {
-            b.set_Board(i, j, p);
-            i++;
-            j--;
-        }
-    }
-
-
-    tab = mo.searchDiagRU(m, p, b);
-    if(tab[0] != 0)
-    {
-        i = m[0];
-        j = m[1];
-        while(i > tab[1] && j < tab[2])
-        {
-            b.set_Board(i, j, p);
-            i--;
-            j++;
-        }
-    }
-
-
-    tab = mo.searchDiagLU(m, p, b);
-    if(tab[0] !=0)
-    {
-        i = m[0];
-        j = m[1];
-        while(i > tab[1] && j > tab[2])
-        {
-            b.set_Board(i, j, p);
-            i--;
-            j--;
-        }
-    }
+    return b;
 }
 
 int game::get_Player()
@@ -300,4 +229,3 @@ int game::opposite_Player()
 {
     return -player;
 }
-       

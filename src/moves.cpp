@@ -1,7 +1,6 @@
 #include "moves.h"
 #include <iostream>
 
-using namespace std;
 
 moves::moves()
 {
@@ -206,3 +205,79 @@ bool moves::isValidMove(const tabmove& m, int player, board b) const
     	return false;
 }
 
+/***********************************
+*   Function that return all 
+*   the possible moves of the
+*   current player in a list of
+*   "tabmove" arrays : [0] : i
+*   coordinate of the move,
+*   [1] : j coordinate of the move
+***********************************/
+
+list<tabmove> moves::get_Moves(board b, int player)
+{
+    list<tabmove> possibleMoves;
+    tabmove m;
+    for (int i = 0; i < SIZE; i++)
+    {
+        m[0] = i;
+        for (int j = 0; j< SIZE; j++)
+        {
+            m[1] = j;
+            if (isValidMove(m, player, b)) possibleMoves.push_back(m); 
+        }
+    }
+    return possibleMoves;
+}
+
+/*********************************
+*   Function that return the best
+*   possible move of the AI.
+**********************************/ 
+
+tabmove moves::findBestMove(board b, int player)
+{
+    list<tabmove> possibleMoves = get_Moves(b,player); 
+
+    int bestValue = -9000;
+    tabmove bestmove = {-1,-1};
+    board undo = b;
+
+    for (tabmove m : possibleMoves)
+    {   
+        // Make the move
+        b.set_Board(m[0], m[1], player);
+
+        /*****************************************************
+        *   Evaluate the move using the minimax function
+        *   depth is 0 because we use this function to start
+        *   the minimax, and false because we call this
+        *   function when the ai plays, which means the next
+        *   move will be made by the minimizing player 
+        *****************************************************/
+        int moveValue =  150; // = minimax(b, 0, false);
+
+        // Undo the move we just did, care, this might use a lot of memory space
+        // Do we have a copy of the gameboard or the gameboard itself ?
+        // Cause we might not even need to undo
+        b = undo;    
+
+        /************************************
+        *   If the value we just calculated
+        *   is better than the previous 
+        *   best value, we update it and 
+        *   make the current move as the new
+        *   best move.
+        *************************************/
+        if (moveValue > bestValue) 
+        {
+            bestmove = m;
+            bestValue = moveValue;
+        }
+    }
+
+    cout << "Best move evaluation is : " << bestValue << endl;
+    cout << "Coordinates :" << endl;
+    cout << "   - i : " << bestmove[0] << endl;
+    cout << "   - j : " << bestmove[1] << endl;
+}
