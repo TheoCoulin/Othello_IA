@@ -3,6 +3,10 @@
 #include "board.h"
 #include "display.h"
 #include "moves.h"
+#include <list>
+#include <ctime>
+
+using namespace std;
 
 class game
 {
@@ -15,6 +19,8 @@ class game
         int winner();
         
         void updateBoard(const tabmove& m);
+
+        list<tabmove> get_Moves();
 
 		int get_Player();
 		void switch_player();
