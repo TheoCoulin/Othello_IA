@@ -197,95 +197,6 @@ void game::updateBoard(const tabmove& m)
     }
 }
 
-void game::updateBoard(const tabmove& m, int p)
-{
-    int i, j;
-    tabcount tab;
-
-    tab = mo.searchLineL(m, p, b);
-    if(tab[0] != 0)
-    {
-        for(j = m[1]; j > tab[2]; j--)
-            b.set_Board(m[0], j, p);
-    }
-
-    tab = mo.searchLineR(m, p, b);
-    if(tab[0] != 0)
-    {
-        for (j = m[1]; j < tab[2]; j++)
-            b.set_Board(m[0], j, p);
-    }
-
-    tab = mo.searchColD(m, p, b);
-    if(tab[0] != 0)
-    {
-        for(int i = m[0]; i < tab[1]; i++)
-            b.set_Board(i, m[1], p);
-    }
-
-    tab = mo.searchColU(m, p, b);
-    if(tab[0] != 0)
-    {
-        for(i = m[0]; i > tab[1]; i--)
-            b.set_Board(i, m[1], p);
-    }
-
-
-    tab = mo.searchDiagRD(m, p, b);
-    if(tab[0] != 0)
-    {
-        i = m[0];
-        j = m[1];
-        while (i < tab[1] && j < tab[2])
-        {
-            b.set_Board(i, j, p);
-            i++;
-            j++;
-        }
-    }
-
-    tab = mo.searchDiagLD(m, p, b);
-    if(tab[0] != 0)
-    {
-        i = m[0];
-        j = m[1];
-        while(i < tab[1] && j > tab[2])
-        {
-            b.set_Board(i, j, p);
-            i++;
-            j--;
-        }
-    }
-
-
-    tab = mo.searchDiagRU(m, p, b);
-    if(tab[0] != 0)
-    {
-        i = m[0];
-        j = m[1];
-        while(i > tab[1] && j < tab[2])
-        {
-            b.set_Board(i, j, p);
-            i--;
-            j++;
-        }
-    }
-
-
-    tab = mo.searchDiagLU(m, p, b);
-    if(tab[0] !=0)
-    {
-        i = m[0];
-        j = m[1];
-        while(i > tab[1] && j > tab[2])
-        {
-            b.set_Board(i, j, p);
-            i--;
-            j--;
-        }
-    }
-}
-
 int game::get_Player()
 {
     return player;
@@ -300,4 +211,3 @@ int game::opposite_Player()
 {
     return -player;
 }
-       

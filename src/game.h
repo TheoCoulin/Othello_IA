@@ -13,11 +13,13 @@ class game
         void game_loop();
         bool end_of_game(int player);
         int winner();
+        
         void updateBoard(const tabmove& m);
-        void updateBoard(const tabmove& m, int player);
+
 		int get_Player();
 		void switch_player();
 		int opposite_Player();        
+		
 		board b;
 		
 
