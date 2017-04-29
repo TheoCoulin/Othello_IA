@@ -7,15 +7,18 @@ attribut nb de pièces jouées, pour pouvoir faire nbPieces - nbBLACK = nbWHITE)
 
 Dans la classe play: 
 	- Bizarre. Ajouter les fonctions play et undo de l'IA.
-	- Voir la structure à utiliser pour garder les coups en mémoire et pouvoir naviquer dans 
-l'arbre.
+	- Voir la structure à utiliser pour garder les coups en mémoire et pouvoir naviguer dans 
+l'arbre. 
+	- Faire une fonction permettant d'avoir tous les moves
+possibles depuis l'etat courant du board.
 
-Dans la classe Game :
-	- Transférer le main dans Game. 							---------- FAIT, dans la fonction game_loop().
-	
-Dans le Board.h :
-	- Changer les valeurs de WHITE et BLACK, pour pouvoir faire une fonction switchPlayer dans la
-classe Game (?). 																---------- FAIT, avec switchplayer qui fait simplement player = -player.
+	POSSIBILITES pour le undo : au debut de la fonction play de l'ai, creer une copie du baord. Dans la fonction, on fait le move donné,
+	donc on update le board du jeu, puis on appelle minimax.
+	Juste apres, on remet le board comme avant !
+	OU ALORS, stocker les coordonnees du pion placé et celle des pions qui ont servi à prendre des pions adverses (plus compliqué).
+	---> https://coderanch.com/t/200906/java/Reversi-Othello : la réponse de Warren Dew, et celle de Jessica Sant, la plus compliquéé.
+	---> http://www.geeksforgeeks.org/minimax-algorithm-in-game-theory-set-3-tic-tac-toe-ai-finding-optimal-move/ : Utile pour comprendre le fonctionnement de la fonction play() qu'on a à faire.
+
 
 
 /!\ - Que faire de ce qui est dans la classe play ???????? Une classe moves ? Pour y mettre la 
