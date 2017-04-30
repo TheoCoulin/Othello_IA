@@ -24,7 +24,6 @@ class moves
         bool isValidMove(const tabmove& m, int player, board b) const;
 
         list<tabmove> get_Moves(board b, int player);
-        tabmove findBestMove(board b, int player);
 };
 
 #endif // MOVE_H

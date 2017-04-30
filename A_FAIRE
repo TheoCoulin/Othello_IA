@@ -5,7 +5,7 @@ Dans la classe board :
 attribut nb de pièces jouées, pour pouvoir faire nbPieces - nbBLACK = nbWHITE) 		----------- FAIT (Pas l'attribut) 
 	- Mettre le updateBoard (qui est dans la classe play) et modifier. 							----------- FAIT (dans la classe game).
 
-Dans la classe moves: 
+Dans la classe play (?) : 
 	- Bizarre. Ajouter les fonctions play et undo de l'IA. ------- Pas forcément besoin de play si tout se fait dans le game_loop() de la classe game.
 	- Voir la structure à utiliser pour garder les coups en mémoire et pouvoir naviguer dans 
 l'arbre. 																				--------- PAS BESOIN NORMALEMENT, car le undo se fait dans la fonction findBestMove.
