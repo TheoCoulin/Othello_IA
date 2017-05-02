@@ -1,5 +1,6 @@
 #include "play.h"
 #include <iostream>
+#include <algorithm>
 
 using namespace std;
 
@@ -78,9 +79,14 @@ tabmove play::findBestMove(moves mo, board b, int player)
 *	using minimax algorithm
 ****************************/
 
+/****************************
+* Main AI function,
+* using minimax algorithm
+****************************/
+
 // Number of nodes we have visited in the game tree.
 int nb_nodes = 0;
-/*
+
 // MINMAX
 int play::max_value(node& n)
 {
@@ -89,7 +95,7 @@ int play::max_value(node& n)
   int res = -INF;
   for (int i = 0; i < n.nb_children; ++i)
     {
-      res = max(res, min_value(n.children[i]));
+      res = std::max(res, min_value(n.children[i]));
     }
   n.value = res;
   return res;
@@ -102,7 +108,7 @@ int play::min_value(node& n)
   int res = INF;
   for (int i = 0; i < n.nb_children; ++i)
     {
-      res = min(res, max_value(n.children[i]));
+      res = std::min(res, max_value(n.children[i]));
     }
   n.value = res;
   return res;
@@ -117,7 +123,7 @@ int play::minmax(tree& t)
   cout << "Number of nodes: " << nb_nodes << endl << endl;
   return max_value(t.root);
 }
-*/
+/*
 int play::minimax(board b, tree& t, int depth, play::typeMode mode)
 {
   moves mo;
@@ -146,6 +152,7 @@ int play::minimax(board b, tree& t, int depth, play::typeMode mode)
 	
 	return res;
 }
+*/
 
 /**************************
 *	Heuristics function.
