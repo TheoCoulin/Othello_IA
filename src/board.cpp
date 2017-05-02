@@ -9,7 +9,8 @@ using namespace std;
 
 board::board()
 {
-    
+    nbPiecesPlayed = 4;
+
     for (int i = 0; i < SIZE; i++) {
         for (int j = 0; j < SIZE; j++) {
             game_board[i][j] = FREE;

@@ -3,6 +3,7 @@
 #include "board.h"
 #include "display.h"
 #include "moves.h"
+#include "play.h"
 #include <list>
 #include <ctime>
 
@@ -33,6 +34,7 @@ class game
 		int player;
 		display disp;
 		moves mo;
+		play p;
 };
 
 #endif // GAME_H
