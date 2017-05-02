@@ -3,16 +3,21 @@
 #include <array>
 #include "board.h"
 #include "moves.h"
+#include "tree.h"
+
+
 
 class play
 {
-
+	enum typeMode {min, max};
     public:
         play();
         virtual ~play();
 
 		tabmove findBestMove(moves mo, board b, int player);
-		int minimax(board b, int depth, bool isMaxPlayer); // Rajouter un moves en param ?
+		int minimax(board b, tree& t, int depth, play::typeMode mode);
+		//int min_value(node& n);
+		//int max_value(node& n)
 		int evaluate(moves mo, board b);
 };
 
