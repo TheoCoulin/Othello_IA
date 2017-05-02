@@ -15,9 +15,10 @@ class play
         virtual ~play();
 
 		tabmove findBestMove(moves mo, board b, int player);
-		int minimax(board b, tree& t, int depth, play::typeMode mode);
-		//int min_value(node& n);
-		//int max_value(node& n)
+		//int minimax(board b, tree& t, int depth, play::typeMode mode);
+		int min_value(node& n);
+		int max_value(node& n);
+		int minmax(tree& t);
 		int evaluate(moves mo, board b);
 };
 
