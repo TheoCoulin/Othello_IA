@@ -3,7 +3,7 @@ A modifier :
 Dans la classe board :
 	- Mettre le nombre de pièces (qui est dans la classe game). (Pour plus tard ajouter un 
 attribut nb de pièces jouées, pour pouvoir faire nbPieces - nbBLACK = nbWHITE) 		----------- FAIT (Pas l'attribut) 
-	- Mettre le updateBoard (qui est dans la classe play) et modifier. 							----------- FAIT (dans la classe game).
+
 
 Dans la classe play (?) : 
 	- Bizarre. Ajouter les fonctions play et undo de l'IA. ------- Pas forcément besoin de play si tout se fait dans le game_loop() de la classe game.
@@ -29,6 +29,3 @@ POSSIBILITES POUR LE UNDO :
 	---> http://www.geeksforgeeks.org/minimax-algorithm-in-game-theory-set-3-tic-tac-toe-ai-finding-optimal-move/ : Utile pour comprendre le fonctionnement de la fonction play() qu'on a à faire. VA VOIR CA C'EST BIEN EXPLIQUE !!!!!
 
 
-
-/!\ - Que faire de ce qui est dans la classe play ???????? Une classe moves ? Pour y mettre la 
-sdd de gardage en mémoire des coups tavu. 			---------- FAIT la création de la classe moves (avec un s sinon car un move existe déjà en C++)

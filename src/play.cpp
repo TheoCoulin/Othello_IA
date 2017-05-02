@@ -74,9 +74,72 @@ tabmove play::findBestMove(moves mo, board b, int player)
 *	using minimax algorithm
 ****************************/
 
-int play::minimax(board b, int depth, bool isMaxPlayer)
+// Number of nodes we have visited in the game tree.
+int nb_nodes = 0;
+/*
+// MINMAX
+int play::max_value(node& n)
 {
+  ++nb_nodes;
+  if (n.nb_children == 0) return n.value;
+  int res = -INF;
+  for (int i = 0; i < n.nb_children; ++i)
+    {
+      res = max(res, min_value(n.children[i]));
+    }
+  n.value = res;
+  return res;
+}
 
+int play::min_value(node& n)
+{
+  ++nb_nodes;
+  if (n.nb_children == 0) return n.value;
+  int res = INF;
+  for (int i = 0; i < n.nb_children; ++i)
+    {
+      res = min(res, max_value(n.children[i]));
+    }
+  n.value = res;
+  return res;
+}
+
+int play::minmax(tree& t)
+{
+  nb_nodes = 0;
+  max_value(t.root);
+  cout << t << endl;
+  cout << "Game value: " << t.root.value << endl;
+  cout << "Number of nodes: " << nb_nodes << endl << endl;
+  return max_value(t.root);
+}
+*/
+int play::minimax(board b, tree& t, int depth, play::typeMode mode)
+{
+	int res;
+	node& n = t.root;
+	
+	if(n.nb_children == 0) return n.value;
+	
+	else
+	{
+		if(depth == 0) return evaluate(b);
+		else
+		{
+			if (mode == max)
+				res = -INF;
+			else res = INF;
+			for (int i = 0; i < n.nb_children; i++)
+			{
+				if (mode == max) 
+					res = max(res, minimax(b, n.children[i], depth-1, min);
+				else
+					res = min(res, minimax(b, n.children[i], depth-1, max);  
+			}
+		}
+	}
+	
+	return res;
 }
 
 /**************************
