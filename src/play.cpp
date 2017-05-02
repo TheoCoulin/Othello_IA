@@ -33,7 +33,9 @@ tabmove play::findBestMove(moves mo, board b, int player)
     {   
         // Make the move
         b.set_Board(m[0], m[1], player);
-
+        cout << "Current move tested :" << endl;
+        cout << "	- i = " << m[0] << endl;
+        cout << "	- j = " << m[1] << endl;
         /*****************************************************
         *   Evaluate the move using the minimax function
         *   depth is 0 because we use this function to start
@@ -41,7 +43,7 @@ tabmove play::findBestMove(moves mo, board b, int player)
         *   function when the ai plays, which means the next
         *   move will be made by the minimizing player 
         *****************************************************/
-        int moveValue =  150; // = minimax(b, 0, false);
+        int moveValue = evaluate(mo, b); // = minimax(b, 0, false);
 
         // Undo the move we just did, care, this might use a lot of memory space
         // Do we have a copy of the gameboard or the gameboard itself ?
@@ -66,6 +68,8 @@ tabmove play::findBestMove(moves mo, board b, int player)
     cout << "Coordinates :" << endl;
     cout << "   - i : " << bestmove[0] << endl;
     cout << "   - j : " << bestmove[1] << endl;
+
+    return bestmove;
 }
 
 
@@ -116,6 +120,7 @@ int play::minmax(tree& t)
 */
 int play::minimax(board b, tree& t, int depth, play::typeMode mode)
 {
+  moves mo;
 	int res;
 	node& n = t.root;
 	
@@ -123,7 +128,7 @@ int play::minimax(board b, tree& t, int depth, play::typeMode mode)
 	
 	else
 	{
-		if(depth == 0) return evaluate(b);
+		if(depth == 0) return evaluate(mo, b);
 		else
 		{
 			if (mode == max)
@@ -143,9 +148,43 @@ int play::minimax(board b, tree& t, int depth, play::typeMode mode)
 }
 
 /**************************
-*	Heuristics function
+*	Heuristics function.
+*	We consider that the 
+*	ai plays the white 
+*	pieces.
 **************************/
-int play::evaluate(board b)
+int play::evaluate(moves mo, board b)
 {
+	int score = 0;
 
+	// Number of black pieces
+	int nbBlack = b.number_pieces(BLACK);
+
+	// Number of white pieces
+	int nbWhite = b.nbPiecesPlayed - nbBlack;
+
+	int parity;
+	int actualMobility = 0;
+	
+	// Number of available moves for each player
+	int nbBlackMoves = mo.nb_Possible_Moves(b, BLACK);
+	cout << "nb of black moves : " << nbBlackMoves << endl;
+	int nbWhiteMoves = mo.nb_Possible_Moves(b, WHITE);
+	cout << "nb of white moves : " << nbWhiteMoves << endl;
+
+
+	// Coin parity : difference between white and black pieces 
+	parity = 100 * (nbWhite - nbBlack) / (b.nbPiecesPlayed);
+
+	// Actual Mobility : diff between nb of white moves and black moves
+	// If ther is at least one move available (to avoid dividing by 0)
+	if (nbBlackMoves + nbWhiteMoves != 0)
+	{
+		actualMobility = 100 * (nbWhiteMoves - nbBlackMoves) / (nbWhiteMoves + nbBlackMoves);
+	}
+
+	score = parity + actualMobility;
+	cout << "Score for this move is : " << score << endl; 
+	return score;
 } 
+

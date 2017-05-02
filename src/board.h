@@ -22,9 +22,11 @@ class board
         int get_Board(int i, int j) const;
         void set_Board(int i, int j, int value);
         int number_pieces(int player);
+        int nbPiecesPlayed;
 
     private:
         int game_board[SIZE][SIZE];
+
 
 };
 

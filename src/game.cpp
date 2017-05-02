@@ -22,6 +22,7 @@ void game::game_loop()
     cout << endl;
 
     disp.print_board_term(b);
+    tabmove mov;
 
     // While one of the players can play, the game continues
     while(!end_of_game(WHITE) || !end_of_game(BLACK))
@@ -35,6 +36,7 @@ void game::game_loop()
         list<tabmove> possibleMoves = mo.get_Moves(b, player);
 
         duration = ( std::clock() - start ) / (double) CLOCKS_PER_SEC;
+        cout << "Number of moves available : " << mo.nb_Possible_Moves(b, player) << endl;
         cout << "time to get moves : " << duration << " sec" << endl;
         // 10e-4 seconds average, to get all the possible moves.
 
@@ -44,18 +46,27 @@ void game::game_loop()
         if(get_Player() == 1) cout << "black" << endl;
         else cout << "white" << endl;
 
-        tabmove mov;
         mov.fill(0);
         
         // Loop to get a valid move from the human player
-        do
+        if (player == BLACK)
         {
-            mo.ask_move(mov);
-            if(! mo.isValidMove(mov, get_Player(), b)) cout << "Try again" << endl;
-        } while (! mo.isValidMove(mov, get_Player(), b));
-
+            do
+            {
+                mo.ask_move(mov);
+                if(! mo.isValidMove(mov, get_Player(), b)) cout << "Try again" << endl;
+            } while (! mo.isValidMove(mov, get_Player(), b));
+    
+        }
+        else 
+        {
+            mov = p.findBestMove(mo, b, player);
+        }
+        
+        cout << "mov[0] : " << mov[0] << "   , mov[1] : " << mov[1] << endl;
         // When we have a valid move in the array mov, we update the board
         updateBoard(mov);
+        b.nbPiecesPlayed++;
 
         // Then we print the board using the display
         disp.print_board_term(b);

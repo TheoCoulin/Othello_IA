@@ -229,3 +229,8 @@ list<tabmove> moves::get_Moves(board b, int player)
     }
     return possibleMoves;
 }
+
+int moves::nb_Possible_Moves(board b, int player)
+{
+    return get_Moves(b, player).size();
+}

@@ -16,9 +16,9 @@ class play
 
 		tabmove findBestMove(moves mo, board b, int player);
 		int minimax(board b, tree& t, int depth, play::typeMode mode);
-		int evaluate(board b); // ajouter un moves en param ?
 		//int min_value(node& n);
 		//int max_value(node& n)
+		int evaluate(moves mo, board b);
 };
 
 #endif // PLAY_H
