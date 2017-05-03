@@ -1,6 +1,7 @@
 #include "play.h"
 #include <iostream>
 #include <algorithm>
+#include <list>
 
 using namespace std;
 
@@ -44,7 +45,7 @@ tabmove play::findBestMove(moves mo, board b, int player)
         *   function when the ai plays, which means the next
         *   move will be made by the minimizing player 
         *****************************************************/
-        int moveValue = evaluate(mo, b); // = minimax(b, 0, false);
+        int moveValue = minimax(b, 5, Min); // = minimax(b, 0, false);
 
         // Undo the move we just did, care, this might use a lot of memory space
         // Do we have a copy of the gameboard or the gameboard itself ?
@@ -84,75 +85,33 @@ tabmove play::findBestMove(moves mo, board b, int player)
 * using minimax algorithm
 ****************************/
 
-// Number of nodes we have visited in the game tree.
-int nb_nodes = 0;
-
-// MINMAX
-int play::max_value(node& n)
+int play::minimax(board b, int depth, typeMode mode)
 {
-  ++nb_nodes;
-  if (n.nb_children == 0) return n.value;
-  int res = -INF;
-  for (int i = 0; i < n.nb_children; ++i)
-    {
-      res = std::max(res, min_value(n.children[i]));
-    }
-  n.value = res;
-  return res;
-}
-
-int play::min_value(node& n)
-{
-  ++nb_nodes;
-  if (n.nb_children == 0) return n.value;
-  int res = INF;
-  for (int i = 0; i < n.nb_children; ++i)
-    {
-      res = std::min(res, max_value(n.children[i]));
-    }
-  n.value = res;
-  return res;
-}
-
-int play::minmax(tree& t)
-{
-  nb_nodes = 0;
-  max_value(t.root);
-  cout << t << endl;
-  cout << "Game value: " << t.root.value << endl;
-  cout << "Number of nodes: " << nb_nodes << endl << endl;
-  return max_value(t.root);
-}
-/*
-int play::minimax(board b, tree& t, int depth, play::typeMode mode)
-{
-  moves mo;
+  	moves mo;
 	int res;
-	node& n = t.root;
-	
-	if(n.nb_children == 0) return n.value;
-	
+	tabmove tab;
+	list<tabmove> liste = mo.get_Moves(b, WHITE);
+	std::list<tabmove>::iterator it;
+
+	if(depth == 0) return evaluate(mo, b);
 	else
 	{
-		if(depth == 0) return evaluate(mo, b);
-		else
+		if (mode == Max)
+			res = -INF;
+		else res = INF;
+		for (it = liste.begin(); it != liste.end(); it++)
 		{
-			if (mode == max)
-				res = -INF;
-			else res = INF;
-			for (int i = 0; i < n.nb_children; i++)
-			{
-				if (mode == max) 
-					res = max(res, minimax(b, n.children[i], depth-1, min);
-				else
-					res = min(res, minimax(b, n.children[i], depth-1, max);  
-			}
+			tab = *it;
+			b.set_Board(tab[0], tab[1], WHITE);
+			if (mode == Max) 
+				res = std::max(res, minimax(b, depth-1, Min));
+			else
+				res = std::min(res, minimax(b, depth-1, Max));  
 		}
 	}
 	
 	return res;
 }
-*/
 
 /**************************
 *	Heuristics function.
