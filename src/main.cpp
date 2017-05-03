@@ -7,6 +7,6 @@ using namespace std;
 
 int main()
 {
-    game g;
-    g.game_loop();
+    play p;
+    p.game_loop();
 }
