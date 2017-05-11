@@ -142,7 +142,7 @@ tabmove play::findBestMove(game g)
       *   function when the ai plays, which means the next
       *   move will be made by the minimizing player 
       *****************************************************/
-      int moveValue = alphabeta(g, 4, -99999, 99999); // = evaluate(mo, b);  
+      int moveValue = alphabeta(g, 3, -999999, 999999); // = evaluate(mo, b);  
 
       // Undo the move we just did, care, this might use a lot of memory space
       // Do we have a copy of the gameboard or the gameboard itself ?
@@ -294,7 +294,7 @@ int play::alphabeta(game g, int depth, int alpha, int beta)
         alpha = res;
         if (beta <= alpha) 
         { 
-          cout << "Cutoff !" << endl;
+          //cout << "Cutoff !" << endl; // DEBUG
           break; // Cut-off : Stops the foreach execution
         }
       }
@@ -305,7 +305,7 @@ int play::alphabeta(game g, int depth, int alpha, int beta)
           g.switch_player();
           playerswapped = true;
         }
-        res = min(res, minimax(g, depth-1));
+        res = min(res, alphabeta(g, depth-1, alpha, beta));
         beta = res;
         if (beta <= alpha) break; // Cut-off : Stops the foreach execution
       }
@@ -328,6 +328,25 @@ int play::evaluate(moves mo, board b)
 {
 	int score = 0;
 
+  // Corners occupancy
+
+  int cornersBlack = 0;
+  int cornersWhite = 0;
+/*
+  int V[8][8] = 
+
+  {
+    {20, -3, 11, 8, 8, 11, -3, 20}
+    {-3, -7, -4, 1, 1, -4, -7, -3}
+    {11, -4, 2, 2, 2, 2, -4, 11}
+    {8, 1, 2, -3, -3, 2, 1, 8}
+    {8, 1, 2, -3, -3, 2, 1, 8}
+    {11, -4, 2, 2, 2, 2, -4, 11}
+    {-3, -7, -4, 1, 1, -4, -7, -3}
+    {20, -3, 11, 8, 8, 11, -3, 20}
+  }
+*/
+
 	// Number of black pieces
 	int nbBlack = b.number_pieces(BLACK);
 
@@ -336,6 +355,12 @@ int play::evaluate(moves mo, board b)
 
 	int parity;
 	int actualMobility = 0;
+  int corner;
+  int cornercloseness;
+
+  int my_tiles = 0;
+  int opp_tiles = 0;
+  //int stability
 	
 	// Number of available moves for each player
 	int nbBlackMoves = mo.nb_Possible_Moves(b, BLACK);
@@ -354,10 +379,78 @@ int play::evaluate(moves mo, board b)
 		actualMobility = 100 * (nbWhiteMoves - nbBlackMoves) / (nbWhiteMoves + nbBlackMoves);
 	}
 
+  // Corners :
+  if (b.get_Board(0,0) == WHITE) 
+  {
+    cornersWhite++;
+  } else if (b.get_Board(0,0) == BLACK)
+  {
+    cornersBlack++;
+  }
+  if (b.get_Board(0,SIZE-1) == WHITE) 
+  {
+    cornersWhite++;
+  } else if (b.get_Board(0,SIZE-1) == BLACK)
+  {
+    cornersBlack++;
+  }
+  if (b.get_Board(SIZE-1,0) == WHITE) 
+  {
+    cornersWhite++;
+  } else if (b.get_Board(SIZE-1,0) == BLACK)
+  {
+    cornersBlack++;
+  }
+  if (b.get_Board(SIZE-1,SIZE-1) == WHITE) 
+  {
+    cornersWhite++;
+  } else if (b.get_Board(SIZE-1,SIZE-1) == BLACK)
+  {
+    cornersBlack++;
+  }
 
+  corner = 25 * (cornersWhite - cornersBlack);
 
-	score = parity + actualMobility;
+  // Corner Closeness
+  if (b.get_Board(0,0) == FREE) {
+    if (b.get_Board(0,1) == WHITE) my_tiles++;
+    else if (b.get_Board(0,1) == BLACK) opp_tiles++;
+    if (b.get_Board(1,0) == WHITE) my_tiles++;
+    else if (b.get_Board(1,0) == BLACK) opp_tiles++;
+    if (b.get_Board(1,1) == WHITE) my_tiles++;
+    else if (b.get_Board(1,1) == BLACK) opp_tiles++;
+  }
+
+  if (b.get_Board(SIZE-1, SIZE-1) == FREE) {
+    if (b.get_Board(SIZE-2, SIZE-2) == WHITE) my_tiles++;
+    else if (b.get_Board(SIZE-2, SIZE-2) == BLACK) opp_tiles++;
+    if (b.get_Board(SIZE-2, SIZE-1) == WHITE) my_tiles++;
+    else if (b.get_Board(SIZE-2, SIZE-1) == BLACK) opp_tiles++;
+    if (b.get_Board(SIZE-1, SIZE-2) == WHITE) my_tiles++;
+    else if (b.get_Board(SIZE-1, SIZE-2) == BLACK) opp_tiles++;
+  }
+
+  if (b.get_Board(0, SIZE-1) == FREE) {
+    if (b.get_Board(0, SIZE-2) == WHITE) my_tiles++;
+    else if (b.get_Board(0, SIZE-2) == BLACK) opp_tiles++;
+    if (b.get_Board(1, SIZE-1) == WHITE) my_tiles++;
+    else if (b.get_Board(1, SIZE-1) == BLACK) opp_tiles++;
+    if (b.get_Board(1, SIZE-2) == WHITE) my_tiles++;
+    else if (b.get_Board(1,SIZE-2) == BLACK) opp_tiles++;
+  }
+
+  if (b.get_Board(SIZE-1, 0) == FREE) {
+    if (b.get_Board(SIZE-1, 1) == WHITE) my_tiles++;
+    else if (b.get_Board(SIZE-1, 1) == BLACK) opp_tiles++;
+    if (b.get_Board(SIZE-2, 0) == WHITE) my_tiles++;
+    else if (b.get_Board(SIZE-2, 0) == BLACK) opp_tiles++;
+    if (b.get_Board(SIZE-2, 1) == WHITE) my_tiles++;
+    else if (b.get_Board(SIZE-2, 1) == BLACK) opp_tiles++;
+  }
+
+  cornercloseness = -12.5 * (my_tiles - opp_tiles);
+
+	score = 10 * parity + 79 * actualMobility + 800 * corner + 382 * cornercloseness;
 	//cout << "Score for this move is : " << score << endl; // DEBUG
 	return score;
-} 
-
+}
