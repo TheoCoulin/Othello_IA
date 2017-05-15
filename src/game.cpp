@@ -16,6 +16,7 @@ game::~game()
     //dtor
 }
 
+/*
 void game::game_loop()
 {
     cout << "For each move, enter first the row, then the column" << endl;
@@ -81,6 +82,7 @@ void game::game_loop()
     // Here we determine the winner and print it
     winner();
 }
+*/
 
 bool game::end_of_game(int player)
 {
@@ -108,19 +110,24 @@ int game::winner()
 {
     if(end_of_game(WHITE) && end_of_game(BLACK))
     {
-        cout << "End of game !" << endl;
+        //cout << "End of game !" << endl;
         if(b.number_pieces(WHITE) > b.number_pieces(BLACK))
         {
-            cout << "Whites win" << endl;
+            //cout << "Whites win" << endl;
             return WHITE;
         }
-        else
+        else if(b.number_pieces(BLACK) > b.number_pieces(WHITE))
         {
-            cout << "Blacks win" << endl;
+            //cout << "Blacks win" << endl;
             return BLACK;
         }
+        else 
+        {
+            //cout << "Draw" << endl;
+            return 0;
+        }
     }
-    return -1;
+    return -100;
 }
 
 /******************************************************

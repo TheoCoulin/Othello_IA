@@ -3,7 +3,7 @@
 #include "board.h"
 #include "display.h"
 #include "moves.h"
-#include "play.h"
+//#include "play.h"
 #include <list>
 #include <ctime>
 
@@ -15,7 +15,7 @@ class game
         game();
         virtual ~game();
 
-        void game_loop();
+        //void game_loop();
         bool end_of_game(int player);
         int winner();
         
@@ -27,14 +27,14 @@ class game
 		void switch_player();
 		int opposite_Player();        
 		
-		
-
-	private:
 		board b;
 		int player;
 		display disp;
 		moves mo;
-		play p;
+		//play p;
+		
+
+	private:
 };
 
 #endif // GAME_H

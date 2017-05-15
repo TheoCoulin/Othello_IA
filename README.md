@@ -1,2 +1,11 @@
 # Othello_IA
-othello game and IA design 
+
+
+Othello game and IA design 
+
+	Minimax and alpha-beta cutoffs implementations
+
+	Heuristics based on mobility, corner occupancy, pieces differences.
+
+
+

@@ -2,24 +2,29 @@
 #define PLAY_H
 #include <array>
 #include "board.h"
-#include "moves.h"
-#include "tree.h"
+#include "game.h"
 
 
 
 class play
 {
-	enum typeMode {min, max};
+	enum typeMode {Min, Max};
     public:
         play();
         virtual ~play();
 
-		tabmove findBestMove(moves mo, board b, int player);
-		//int minimax(board b, tree& t, int depth, play::typeMode mode);
-		int min_value(node& n);
-		int max_value(node& n);
-		int minmax(tree& t);
+        void game_loop();
+
+		tabmove findBestMove(game g);
+		int minimax(game g, int depth);
+		int alphabeta(game g, int depth, int alpha, int beta);
 		int evaluate(moves mo, board b);
+
+
+
+	private:
+		game g;
+		display disp;
 };
 
 #endif // PLAY_H
