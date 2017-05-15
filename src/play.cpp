@@ -136,13 +136,11 @@ tabmove play::findBestMove(game g)
       */
 
       /*****************************************************
-      *   Evaluate the move using the minimax function
-      *   depth is 0 because we use this function to start
-      *   the minimax, and false because we call this
-      *   function when the ai plays, which means the next
-      *   move will be made by the minimizing player 
+      *   Evaluate the move using the alphabeta function
+      *   depth is the number of levels the ai will go 
+      *   through in the game tree.
       *****************************************************/
-      int moveValue = alphabeta(g, 3, -999999, 999999); // = evaluate(mo, b);  
+      int moveValue = alphabeta(g, 3, -999999, 999999);   
 
       // Undo the move we just did, care, this might use a lot of memory space
       // Do we have a copy of the gameboard or the gameboard itself ?
@@ -332,20 +330,7 @@ int play::evaluate(moves mo, board b)
 
   int cornersBlack = 0;
   int cornersWhite = 0;
-/*
-  int V[8][8] = 
 
-  {
-    {20, -3, 11, 8, 8, 11, -3, 20}
-    {-3, -7, -4, 1, 1, -4, -7, -3}
-    {11, -4, 2, 2, 2, 2, -4, 11}
-    {8, 1, 2, -3, -3, 2, 1, 8}
-    {8, 1, 2, -3, -3, 2, 1, 8}
-    {11, -4, 2, 2, 2, 2, -4, 11}
-    {-3, -7, -4, 1, 1, -4, -7, -3}
-    {20, -3, 11, 8, 8, 11, -3, 20}
-  }
-*/
 
 	// Number of black pieces
 	int nbBlack = b.number_pieces(BLACK);

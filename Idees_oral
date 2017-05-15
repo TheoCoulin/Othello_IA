@@ -1,7 +1,0 @@
-Les améliorations qu'on aurait pu faire :
-
-	- Utiliser des couples plutôt que des tableaux d'entier, pour les coups et tabcount ?
-
-	- Utiliser une queue plutôt qu'une liste pour les coups possibles ?
-
-	- Passer les boards à la fonction d'ia par référence ou copie ???? Impact sur la fonction undo ?
