@@ -1,6 +1,7 @@
 #include "play.h"
 #include <iostream>
 #include <algorithm>
+#include <list>
 
 using namespace std;
 
@@ -111,6 +112,7 @@ tabmove play::findBestMove(game g)
 
 	list<tabmove> possibleMoves = g.mo.get_Moves(g.b,g.player); 
 
+<<<<<<< HEAD
   int bestValue = -9000;
   tabmove bestmove = {-1,-1};
   board undo = g.b;
@@ -161,6 +163,42 @@ tabmove play::findBestMove(game g)
           bestValue = moveValue;
       }
   }
+=======
+    for (tabmove m : possibleMoves)
+    {   
+        // Make the move
+        b.set_Board(m[0], m[1], player);
+        cout << "Current move tested :" << endl;
+        cout << "	- i = " << m[0] << endl;
+        cout << "	- j = " << m[1] << endl;
+        /*****************************************************
+        *   Evaluate the move using the minimax function
+        *   depth is 0 because we use this function to start
+        *   the minimax, and false because we call this
+        *   function when the ai plays, which means the next
+        *   move will be made by the minimizing player 
+        *****************************************************/
+        int moveValue = minimax(b, 5, Min); // = minimax(b, 0, false);
+
+        // Undo the move we just did, care, this might use a lot of memory space
+        // Do we have a copy of the gameboard or the gameboard itself ?
+        // Cause we might not even need to undo, if we do not touch the game board but a copy of itself
+        b = undo;    
+
+        /************************************
+        *   If the value we just calculated
+        *   is better than the previous 
+        *   best value, we update it and 
+        *   make the current move as the new
+        *   best move.
+        *************************************/
+        if (moveValue > bestValue) 
+        {
+            bestmove = m;
+            bestValue = moveValue;
+        }
+    }
+>>>>>>> d72a38d3338ba190801b089eaa2b298f0a756dea
 
   cout << "Best move evaluation is : " << bestValue << endl;
   cout << "Coordinates :" << endl;
@@ -176,6 +214,7 @@ tabmove play::findBestMove(game g)
 *	using minimax algorithm
 ****************************/
 
+<<<<<<< HEAD
 int play::minimax(game g, int depth)
 {
   //cout << "In minimax !" << endl << endl; // DEBUG
@@ -314,6 +353,39 @@ int play::alphabeta(game g, int depth, int alpha, int beta)
   }
   
   return res;
+=======
+/****************************
+* Main AI function,
+* using minimax algorithm
+****************************/
+
+int play::minimax(board b, int depth, typeMode mode)
+{
+  	moves mo;
+	int res;
+	tabmove tab;
+	list<tabmove> liste = mo.get_Moves(b, WHITE);
+	std::list<tabmove>::iterator it;
+
+	if(depth == 0) return evaluate(mo, b);
+	else
+	{
+		if (mode == Max)
+			res = -INF;
+		else res = INF;
+		for (it = liste.begin(); it != liste.end(); it++)
+		{
+			tab = *it;
+			b.set_Board(tab[0], tab[1], WHITE);
+			if (mode == Max) 
+				res = std::max(res, minimax(b, depth-1, Min));
+			else
+				res = std::min(res, minimax(b, depth-1, Max));  
+		}
+	}
+	
+	return res;
+>>>>>>> d72a38d3338ba190801b089eaa2b298f0a756dea
 }
 
 /**************************
